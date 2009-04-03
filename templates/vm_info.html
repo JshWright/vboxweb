@@ -33,8 +33,12 @@
         <h5>Actions:</h5>
         <ul>
             <li><a href='/control_vm/${vm.id}/power_off'>Power Off VM</a></li>
-            <li><a href='/control_vm/${vm.id}/pause'>Pause VM</a></li>
-            <li><a href='/control_vm/${vm.id}/resume'>Resume VM</a></li>
+            <py:if test="state == 'Running'">
+                <li><a href='/control_vm/${vm.id}/pause'>Pause VM</a></li>
+            </py:if>
+            <py:if test="state == 'Paused'">
+                <li><a href='/control_vm/${vm.id}/resume'>Resume VM</a></li>
+            </py:if>
         </ul>
         </div>
     </body>
