@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/" py:strip="">
+
+    <py:match path="head" once="true">
+    <head py:attrs="select('@*')">
+        <title py:with="title = list(select('title/text()'))">
+            VBoxWeb<py:if test="title">: ${title}</py:if>
+        </title>
+        <link rel="stylesheet" href="/media/style.css" type="text/css" />
+        <script type="text/javascript" src="/media/jquery.js"></script>
+        ${select('*[local-name()!="title"]')}
+        </head>
+    </py:match>
+
+    <py:match path="body" once="true">
+    <body py:attrs="select('@*')"><div id="wrapper">
+        <div id="header">
+            <h1>VBoxWeb</h1>
+        </div>
+        <div id="leftcolumn">
+            Navigation<br />
+            Stuff<br />
+            Might<br />
+            Go<br />
+            Here<br />
+        </div>
+        <div id="rightcolumn">
+            ${select('*|text()')}
+        </div>
+        <div id="footer">
+        </div>
+     </div></body>
+    </py:match>
+
+</html>
+

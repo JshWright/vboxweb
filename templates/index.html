@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="layout.html" />
+  <head>
+    <title>Index</title>
+  </head>
+  <body class="index">
+    <h3>Existing Virtual Machines:</h3>
+    <ul py:if="vms">
+      <li py:for="vm in vms">
+        <a href="/vm_info/${vm.id}">${vm.name}</a>
+      </li>
+    </ul>
+  </body>
+</html>
+
