@@ -85,4 +85,10 @@ class Root:
         elif action == 'resume':
             console.resume()
         session.close()
-        raise cherrypy.HTTPRedirect('/vm_info/' + uuid) 
+        raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
+
+    @cherrypy.expose
+    def modify_vm(self, uuid):
+        vm = self.vbox.getMachine(uuid)
+        tmpl = loader.load('modify_vm.html')
+        return tmpl.generate(vm=vm).render('html', doctype='html')

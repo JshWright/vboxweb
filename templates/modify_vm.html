@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+    <xi:include href="layout.html" />
+    <head>
+        <title>Modify VM - ${vm.name}</title>
+    </head>
+    <body class="index">
+        <form method='POST' action=''>
+            Name: <input type='text' value='${vm.name}' /><br />
+            Description: <input type='text' value='${vm.description}' /><br />
+            Memory Allocated: <input type='text' value='${vm.memorySize}' />MB<br />
+            Video Memory Allocated: <input type='text' value='${vm.VRAMSize}' />MB<br />
+            Hardware Virtualization Enabled: <input type='checkbox' /><br />
+            Nested Paging Enabled: <input type='checkbox' /><br />
+        </form>
+    </body>
+</html>
