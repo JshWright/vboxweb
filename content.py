@@ -39,6 +39,10 @@ loader = TemplateLoader(
     auto_reload=True
 )
 
+VM_STATES = (None, 'Powered Off', 'Saved', 'Aborted', 'Running', 'Paused',
+                'Stuck', 'Starting', 'Stopping', 'Saving', 'Restoring',
+                'Discarding', 'Setting Up')
+
 class Root:
 
     def __init__(self):
@@ -65,8 +69,10 @@ class Root:
 
     @cherrypy.expose
     def vm_info(self, uuid):
+        vm = self.vbox.getMachine(uuid)
+        state = VM_STATES[int(vm.state)]
         tmpl = loader.load('vm_info.html')
-        return tmpl.generate(vm=self.vbox.getMachine(uuid)).render('html', doctype='html')
+        return tmpl.generate(vm=vm, state=state).render('html', doctype='html')
 
     @cherrypy.expose
     def control_vm(self, uuid, action):
