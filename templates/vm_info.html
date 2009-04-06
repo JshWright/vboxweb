@@ -33,7 +33,9 @@
         <div class='vm_actions'>
         <h5>Actions:</h5>
         <ul>
-            <li><a href='/control_vm/${vm.id}/power_off'>Power Off VM</a></li>
+            <py:if test="state in ('Running', 'Paused',  'Stuck')">
+                <li><a href='/control_vm/${vm.id}/power_off'>Power Off VM</a></li>
+            </py:if>
             <py:if test="state == 'Running'">
                 <li><a href='/control_vm/${vm.id}/pause'>Pause VM</a></li>
             </py:if>
