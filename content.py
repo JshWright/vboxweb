@@ -27,6 +27,7 @@
 
 import os, sys, traceback, cherrypy
 from genshi.template import TemplateLoader
+from genshi.filters import HTMLFormFiller
 
 sys.path.append('/usr/lib/virtualbox')
 
@@ -92,9 +93,18 @@ class Root:
     @cherrypy.expose
     def modify_vm(self, uuid):
         vm = self.vbox.getMachine(uuid)
+        form_data = {'name': vm.name,
+                     'description': vm.description,
+                     'memory': vm.memorySize,
+                     'vram': vm.VRAMSize,
+                     'hwvirtex': False,
+                     'nestedpaging': vm.HWVirtExNestedPagingEnabled}
+        if vm.HWVirtExEnabled == 1:
+            form_data['hwvirtex'] = True
+        filler = HTMLFormFiller(data=form_data)
         tmpl = loader.load('modify_vm.html')
         if cherrypy.request.method.upper() == 'POST':
-            # Process the form submission
+            #TODO Some validation might be nice, eh?
             pass
         else:
-            return tmpl.generate(vm=vm).render('html', doctype='html')
+            return tmpl.generate(vm=vm).filter(filler).render('html', doctype='html')
