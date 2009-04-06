@@ -93,4 +93,8 @@ class Root:
     def modify_vm(self, uuid):
         vm = self.vbox.getMachine(uuid)
         tmpl = loader.load('modify_vm.html')
-        return tmpl.generate(vm=vm).render('html', doctype='html')
+        if cherrypy.request.method.upper() == 'POST':
+            # Process the form submission
+            pass
+        else:
+            return tmpl.generate(vm=vm).render('html', doctype='html')

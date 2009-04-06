@@ -7,13 +7,32 @@
         <title>Modify VM - ${vm.name}</title>
     </head>
     <body class="index">
-        <form method='POST' action=''>
-            Name: <input type='text' value='${vm.name}' /><br />
-            Description: <input type='text' value='${vm.description}' /><br />
-            Memory Allocated: <input type='text' value='${vm.memorySize}' />MB<br />
-            Video Memory Allocated: <input type='text' value='${vm.VRAMSize}' />MB<br />
-            Hardware Virtualization Enabled: <input type='checkbox' /><br />
-            Nested Paging Enabled: <input type='checkbox' /><br />
-        </form>
+        <form action="" method="post">
+            <table summary="" style='text-align: right;'><tbody><tr>
+                <th><label for="name">VM Name:</label></th>
+                <td><input type="text" id="name" name="name" value='${vm.name}' /></td>
+            </tr><tr>
+                <th><label for="description">Description:</label></th>
+                <td><input type="text" id="description" name="description" value='${vm.description}' /></td>
+            </tr><tr>
+                <th><label for="memory">Memory Allocated (MB):</label></th>
+                <td><input type="text" id="memory" name="memory" value='${vm.memorySize}' /></td>
+            </tr><tr>
+                <th><label for="vram">Video Memory Allocated (MB):</label></th>
+                <td><input type="text" id="vram" name="vram" value='${vm.VRAMSize}' /></td>
+            </tr><tr>
+                <th><label for="hwvirtex">Hardware Virtualization Enabled:</label></th>
+                <td><input type="checkbox" id="hwvirtex" name="hwvirtex" /></td>
+            </tr><tr>
+                <th><label for="nestedpaging">Nested Paging Enabled:</label></th>
+                <td><input type="checkbox" id="nestedpaging" name="nestedpaging" /></td>
+            </tr><tr>
+        <td></td>
+        <td>
+          <input type="submit" value="Submit" />
+          <input type="submit" name="cancel" value="Cancel" />
+        </td>
+      </tr></tbody></table>
+    </form>
     </body>
 </html>
