@@ -91,7 +91,7 @@ class Root:
         raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
 
     @cherrypy.expose
-    def modify_vm(self, uuid):
+    def modify_vm(self, uuid, name=None, description=None, memory=None, vram=None, hwvirtex=None, nestedpaging=None):
         vm = self.vbox.getMachine(uuid)
         form_data = {'name': vm.name,
                      'description': vm.description,
@@ -104,6 +104,15 @@ class Root:
         filler = HTMLFormFiller(data=form_data)
         tmpl = loader.load('modify_vm.html')
         if cherrypy.request.method.upper() == 'POST':
+            vm.name = name
+            vm.description = description
+            vm.memorySize = memory
+            vm.VRAMSize = vram
+            if hwvirtex:
+                vm.HWVirtExEnabled = 1
+            else:
+                vm.HWVirtExEnabled = 0
+            vm.HWVirtExNestedPagingEnabled = nestedpaging
             #TODO Some validation might be nice, eh?
             pass
         else:
