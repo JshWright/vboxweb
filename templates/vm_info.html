@@ -13,6 +13,7 @@
             <dd>Info</dd>
         </dl>
         <h2>VM Name: ${vm.name}</h2>
+        <hr/>
         <h4>${vm.description}&#160;</h4>
         <h5>Current State: $state</h5>
         <h5>Guest OS: ${guest_os}</h5>
@@ -21,6 +22,9 @@
         <ul>
             <li>Memory Allocated: ${vm.memorySize}MB</li>
             <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
+            <li>Boot Order: todo</li>
+            <li>ACPI: todo</li>
+            <li>IO APIC: todo</li>
             <li>Hardware Virtualization Enabled:
                 <py:choose test="vm.HWVirtExEnabled">
                     <py:when test="0">Off</py:when>
@@ -32,6 +36,18 @@
                 <py:choose test="vm.HWVirtExNestedPagingEnabled">
                     <py:when test="False">Off</py:when>
                     <py:when test="True">On</py:when>
+                </py:choose>
+            </li>
+            <li>PAE/NX:
+                <py:choose test="vm.PAEEnabled">
+                  <py:when test="False">Disabled</py:when>
+                  <py:when test="True">Enabled</py:when>
+                </py:choose>
+            </li>
+            <li>3D Acceleration:
+                <py:choose test="vm.accelerate3DEnabled">
+                  <py:when test="False">Disabled</py:when>
+                  <py:when test="True">Enabled</py:when>
                 </py:choose>
             </li>
         </ul>
