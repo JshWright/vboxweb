@@ -69,6 +69,13 @@ ul {
   margin:0.5em 2em;
 }
 
+#leftcolumn ul{
+  margin:0 0 0 1em;
+}
+#leftcolumn ul li{
+ margin:0 0 0.5em 0;
+}
+
 dl.breadcrumb dd{
   float:left;
   margin:0 0.5em 0.5em 0;

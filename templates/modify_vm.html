@@ -7,6 +7,11 @@
         <title>Modify VM - ${vm.name}</title>
     </head>
     <body class="index">
+        <dl class="breadcrumb">
+            <dd><a href="/">Home</a></dd>
+            <dd><a href="/vm_info/${vm.id}">${vm.name}</a></dd>
+            <dd>Modify</dd>
+        </dl>
         <form action="" method="post">
             <table summary="" style='text-align: right;'><tbody><tr>
                 <th><label for="name">VM Name:</label></th>
