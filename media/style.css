@@ -69,6 +69,24 @@ ul {
   margin:0.5em 2em;
 }
 
+dl.breadcrumb dd{
+  float:left;
+  margin:0 0.5em 0.5em 0;
+}
+dl.breadcrumb:after{
+  content:".";
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+}
+dl.breadcrumb dd:after{
+  content: " > ";
+}
+dl.breadcrumb dd:last-child:after{
+  content: "";
+}
+
 .vm_settings {
   padding: 0px 0px 10px 10px;
 }

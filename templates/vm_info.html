@@ -7,6 +7,11 @@
         <title>VM Info - ${vm.name}</title>
     </head>
     <body class="index">
+        <dl class="breadcrumb">
+            <dd><a href="/">Home</a></dd>
+            <dd>${vm.name}</dd>
+            <dd>Info</dd>
+        </dl>
         <h2>VM Name: ${vm.name}</h2>
         <h4>${vm.description}</h4><br />
         <h5>Current State: $state</h5>
