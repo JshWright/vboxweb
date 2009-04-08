@@ -5,7 +5,20 @@ body {
  font-size: 13px;
  background: #B3B3B3;
 }
-#wrapper { 
+h1{
+  letter-spacing: -1px;
+  color:#ffffff;
+}
+h3{
+  margin-bottom:1em;
+}
+h4{
+  margin-bottom:1em;
+}
+h5{
+  margin-bottom:1em;
+}
+#wrapper {
  margin: 0 auto;
  width: 922px;
 
@@ -18,19 +31,20 @@ body {
  border: 1px solid #ccc;
  height: 100px;
  margin: 10px 0px 5px 0px;
- background: #7D88B3;
+ background-color: #7D88B3;
+ background-image: url(/media/header1.png);
 }
-#leftcolumn { 
+#leftcolumn {
  color: #333;
  border: 1px solid #ccc;
  background: #98A5D9;
  margin: 0px 5px 5px 0px;
- padding: 10px;
- height: 350px;
- width: 95px;
+ padding: 5px;
+ height: 360px;
+ width: 105px;
  float: left;
 }
-#rightcolumn { 
+#rightcolumn {
  float: right;
  color: #333;
  border: 1px solid #ccc;
@@ -41,7 +55,7 @@ body {
  width: 778px;
  display: inline;
 }
-#footer { 
+#footer {
  width: 900px;
  clear: both;
  color: #333;
@@ -49,6 +63,10 @@ body {
  background: #7D88B3;
  margin: 0px 0px 10px 0px;
  padding: 10px;
+}
+
+ul {
+  margin:0.5em 2em;
 }
 
 .vm_settings {
