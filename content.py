@@ -79,14 +79,19 @@ class Root:
 
     @cherrypy.expose
     def control_vm(self, uuid, action):
-        session = self.get_existing_session(uuid)
-        console = session.console
-        if action == 'power_off':
-            console.powerDown()
-        elif action == 'pause':
-            console.pause()
-        elif action == 'resume':
-            console.resume()
+        if action == 'power_up':
+            session = self.mgr.getSessionObject(self.vbox)
+            progress = self.vbox.openRemoteSession(session, uuid, 'gui', '')
+            progress.waitForCompletion(-1)
+        else:
+            session = self.get_existing_session(uuid)
+            console = session.console
+            if action == 'power_off':
+                console.powerDown()
+            elif action == 'pause':
+                console.pause()
+            elif action == 'resume':
+                console.resume()
         session.close()
         raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
 
