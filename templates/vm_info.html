@@ -13,9 +13,9 @@
             <dd>Info</dd>
         </dl>
         <h2>VM Name: ${vm.name}</h2>
-        <h4>${vm.description}</h4><br />
+        <h4>${vm.description}&#160;</h4>
         <h5>Current State: $state</h5>
-        <h5>Guest OS: ${guest_os}</h5><br />
+        <h5>Guest OS: ${guest_os}</h5>
         <div class='vm_settings'>
         <h5>Settings</h5>
         <ul>
@@ -40,16 +40,16 @@
         <h5>Actions:</h5>
         <ul>
             <py:if test="state in ('Powered Off', 'Saved', 'Aborted')">
-                <li><a href='/control_vm/${vm.id}/power_up'>Power Up VM</a></li>
+                <li><a href="/control_vm/${vm.id}/power_up">Power Up VM</a></li>
             </py:if>
             <py:if test="state in ('Running', 'Paused', 'Stuck')">
-                <li><a href='/control_vm/${vm.id}/power_off'>Power Off VM</a></li>
+                <li><a href="/control_vm/${vm.id}/power_off">Power Off VM</a></li>
             </py:if>
             <py:if test="state == 'Running'">
-                <li><a href='/control_vm/${vm.id}/pause'>Pause VM</a></li>
+                <li><a href="/control_vm/${vm.id}/pause">Pause VM</a></li>
             </py:if>
             <py:if test="state == 'Paused'">
-                <li><a href='/control_vm/${vm.id}/resume'>Resume VM</a></li>
+                <li><a href="/control_vm/${vm.id}/resume">Resume VM</a></li>
             </py:if>
         </ul>
         </div>
