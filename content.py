@@ -81,7 +81,7 @@ class Root:
     def control_vm(self, uuid, action):
         if action == 'power_up':
             session = self.mgr.getSessionObject(self.vbox)
-            progress = self.vbox.openRemoteSession(session, uuid, 'gui', '')
+            progress = self.vbox.openRemoteSession(session, uuid, 'vrdp', '')
             progress.waitForCompletion(-1)
         else:
             session = self.get_existing_session(uuid)
