@@ -25,7 +25,21 @@
 #
 # ***** END LICENSE BLOCK *****
 
-import os, cherrypy
+import os, sys
+
+try:
+    import cherrypy
+    major_version = int(cherrypy.__version__[0])
+    if major_version < 3:
+        raise ImportError
+except ImportError:
+    print """
+            VBoxWeb requires CherryPy (version 3.0 or higher).
+
+            You can download the latest version of CherryPy
+                    from http://www.cherrypy.org/
+          """
+    sys.exit()
 
 from content import Root
 
