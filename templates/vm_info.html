@@ -23,8 +23,18 @@
             <li>Memory Allocated: ${vm.memorySize}MB</li>
             <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
             <li>Boot Order: todo</li>
-            <li>ACPI: todo</li>
-            <li>IO APIC: todo</li>
+            <li>ACPI: 
+                <py:choose test="vm.BIOSSettings.ACPIEnabled">
+                    <py:when test="False">Off</py:when>
+                    <py:when test="True">On</py:when>
+                </py:choose>
+            </li>
+            <li>IO APIC: 
+                <py:choose test="vm.BIOSSettings.IOAPICEnabled">
+                    <py:when test="False">Off</py:when>
+                    <py:when test="True">On</py:when>
+                </py:choose>
+            </li>
             <li>Hardware Virtualization:
                 <py:choose test="vm.HWVirtExEnabled">
                     <py:when test="0">Off</py:when>
