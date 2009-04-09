@@ -5,18 +5,21 @@ body {
  font-size: 13px;
  background: #B3B3B3;
 }
+img{
+  border:none;
+}
 h1{
   letter-spacing: -1px;
   color:#ffffff;
 }
 h3{
-  margin-bottom:1em;
+  margin-bottom:0.5em;
 }
 h4{
-  margin-bottom:1em;
+  margin-bottom:0.5em;
 }
 h5{
-  margin-bottom:1em;
+  margin-bottom:0.5em;
 }
 #wrapper {
  margin: 0 auto;
