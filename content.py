@@ -103,25 +103,29 @@ class Root:
     def modify_vm(self, uuid, name=None, description=None, memory=None, vram=None, hwvirtex=None, nestedpaging=None):
         if cherrypy.request.method.upper() == 'POST':
             #TODO Some form validation might be nice, eh?
-            #TODO Fail gracefully if the VM isn't mutable
-            session = self.mgr.getSessionObject(self.vbox)
-            self.vbox.openSession(session, uuid)
-            vm = session.machine
-            vm.name = name
-            vm.description = description
-            vm.memorySize = memory
-            vm.VRAMSize = vram
-            if hwvirtex:
-                vm.HWVirtExEnabled = 1
-            else:
-                vm.HWVirtExEnabled = 0
-            if nestedpaging == 'on':
-                vm.HWVirtExNestedPagingEnabled = 1
-            else:
-                vm.HWVirtExNestedPagingEnabled = 0
-            vm.saveSettings()
-            session.close()
-            raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
+            try:
+                session = self.mgr.getSessionObject(self.vbox)
+                self.vbox.openSession(session, uuid)
+                vm = session.machine
+                vm.name = name
+                vm.description = description
+                vm.memorySize = memory
+                vm.VRAMSize = vram
+                if hwvirtex:
+                    vm.HWVirtExEnabled = 1
+                else:
+                    vm.HWVirtExEnabled = 0
+                if nestedpaging == 'on':
+                    vm.HWVirtExNestedPagingEnabled = 1
+                else:
+                    vm.HWVirtExNestedPagingEnabled = 0
+                vm.saveSettings()
+                session.close()
+                raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
+            except Exception,e:
+                error_message = "Unable to modify VM. %s" % (e,)
+                tmpl = loader.load('error.html')
+                return tmpl.generate(error_message=error_message).render('html', doctype='html')
         else:
             vm = self.vbox.getMachine(uuid)
             form_data = {'name': vm.name,
