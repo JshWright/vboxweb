@@ -25,14 +25,14 @@
             <li>Boot Order: todo</li>
             <li>ACPI: todo</li>
             <li>IO APIC: todo</li>
-            <li>Hardware Virtualization Enabled:
+            <li>Hardware Virtualization:
                 <py:choose test="vm.HWVirtExEnabled">
                     <py:when test="0">Off</py:when>
                     <py:when test="1">On</py:when>
                     <py:when test="2">Default</py:when>
                 </py:choose>
             </li>
-            <li>Nested Paging Enabled:
+            <li>Nested Paging:
                 <py:choose test="vm.HWVirtExNestedPagingEnabled">
                     <py:when test="False">Off</py:when>
                     <py:when test="True">On</py:when>
