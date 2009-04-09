@@ -1,30 +1,38 @@
 * { padding: 0; margin: 0; }
 
+/*************************
+ * Basic Elements
+ *************************/
 body {
  font-family: Arial, Helvetica, sans-serif;
  font-size: 13px;
  background: #B3B3B3;
 }
-img{
-  border:none;
-}
-h1{
+h1 {
   letter-spacing: -1px;
   color:#ffffff;
 }
-h3{
+h3 {
   margin-bottom:0.5em;
 }
-h4{
+h4 {
   margin-bottom:0.5em;
 }
-h5{
+h5 {
   margin-bottom:0.5em;
 }
+ul {
+  margin:0.5em 2em;
+}
+img {
+  border:none;
+}
+/*************************
+ * Main Layout Structure
+ *************************/
 #wrapper {
  margin: 0 auto;
  width: 922px;
-
 }
 #header {
  color: #333;
@@ -47,6 +55,12 @@ h5{
  width: 105px;
  float: left;
 }
+#leftcolumn ul {
+  margin:0 0 0 1em;
+}
+#leftcolumn ul li {
+ margin:0 0 0.5em 0;
+}
 #rightcolumn {
  float: right;
  color: #333;
@@ -68,39 +82,55 @@ h5{
  padding: 10px;
 }
 
-ul {
-  margin:0.5em 2em;
-}
-
-#leftcolumn ul{
-  margin:0 0 0 1em;
-}
-#leftcolumn ul li{
- margin:0 0 0.5em 0;
-}
-
-dl.breadcrumb dd{
+/*************************
+ * Bread Crumbs
+ *************************/
+dl.breadcrumb dd {
   float:left;
   margin:0 0.5em 0.5em 0;
 }
-dl.breadcrumb:after{
+dl.breadcrumb:after {
   content:".";
   display:block;
   height:0;
   clear:both;
   visibility:hidden;
 }
-dl.breadcrumb dd:after{
+dl.breadcrumb dd:after {
   content: " > ";
 }
-dl.breadcrumb dd:last-child:after{
+dl.breadcrumb dd:last-child:after {
   content: "";
 }
 
+/*************************
+ * SubSections
+ *************************/
 .vm_settings {
   padding: 0px 0px 10px 10px;
 }
 
 .vm_actions {
   padding: 0px 0px 0px 10px;
+}
+
+/*************************
+ * Form Structures
+ *************************/
+form table tbody tr th label{
+  margin:0 0.5em 0 0;
+}
+form table tbody tr td input{
+  border: thin solid #7D88B3;
+  padding: 1px 2px;
+  color:inherit;
+  background-color:#EFEFEF;
+}
+form table tbody tr td input:hover,
+form table tbody tr td input:focus{
+  color:inherit;
+  background-color:#DEDEDE;
+}
+form table tbody tr td input[type="submit"]{
+  cursor: pointer;
 }
