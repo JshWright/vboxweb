@@ -97,18 +97,12 @@ class Root:
 
     @cherrypy.expose
     def modify_vm(self, uuid, name=None, description=None, memory=None, vram=None, hwvirtex=None, nestedpaging=None):
-        vm = self.vbox.getMachine(uuid)
-        form_data = {'name': vm.name,
-                     'description': vm.description,
-                     'memory': vm.memorySize,
-                     'vram': vm.VRAMSize,
-                     'hwvirtex': False,
-                     'nestedpaging': vm.HWVirtExNestedPagingEnabled}
-        if vm.HWVirtExEnabled == 1:
-            form_data['hwvirtex'] = True
-        filler = HTMLFormFiller(data=form_data)
-        tmpl = loader.load('modify_vm.html')
         if cherrypy.request.method.upper() == 'POST':
+            #TODO Some form validation might be nice, eh?
+            #TODO Fail gracefully if the VM isn't mutable
+            session = self.mgr.getSessionObject(self.vbox)
+            self.vbox.openSession(session, uuid)
+            vm = session.machine
             vm.name = name
             vm.description = description
             vm.memorySize = memory
@@ -117,8 +111,23 @@ class Root:
                 vm.HWVirtExEnabled = 1
             else:
                 vm.HWVirtExEnabled = 0
-            vm.HWVirtExNestedPagingEnabled = nestedpaging
-            #TODO Some validation might be nice, eh?
-            pass
+            if nestedpaging == 'on':
+                vm.HWVirtExNestedPagingEnabled = 1
+            else:
+                vm.HWVirtExNestedPagingEnabled = 0
+            vm.saveSettings()
+            session.close()
+            raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
         else:
+            vm = self.vbox.getMachine(uuid)
+            form_data = {'name': vm.name,
+                         'description': vm.description,
+                         'memory': vm.memorySize,
+                         'vram': vm.VRAMSize,
+                         'hwvirtex': False,
+                         'nestedpaging': vm.HWVirtExNestedPagingEnabled}
+            if vm.HWVirtExEnabled == 1:
+                form_data['hwvirtex'] = True
+            filler = HTMLFormFiller(data=form_data)
+            tmpl = loader.load('modify_vm.html')
             return tmpl.generate(vm=vm).filter(filler).render('html', doctype='html')
