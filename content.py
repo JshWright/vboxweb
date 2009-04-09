@@ -59,7 +59,7 @@ class Root:
         session = self.mgr.getSessionObject(self.vbox)
         try:
             self.vbox.openExistingSession(session, uuid)
-        except Exception,e:
+        except xpcom.COMException,e:
             return "Unable to process action: %s" % e
         return session
 
@@ -123,7 +123,7 @@ class Root:
                 vm.saveSettings()
                 session.close()
                 raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
-            except Exception,e:
+            except xpcom.COMException,e:
                 error_message = "Unable to modify VM. %s" % (e,)
                 tmpl = loader.load('error.html')
                 return tmpl.generate(error_message=error_message).render('html', doctype='html')
