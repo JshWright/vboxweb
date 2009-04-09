@@ -112,6 +112,14 @@ class Root:
                 vm.description = form_data['description']
                 vm.memorySize = form_data['memory']
                 vm.VRAMSize = form_data['vram']
+                if 'acpi' in form_data:
+                    vm.BIOSSettings.ACPIEnabled = 1
+                else:
+                    vm.BIOSSettings.ACPIEnabled = 0
+                if 'ioapic' in form_data:
+                    vm.BIOSSettings.IOAPICEnabled = 1
+                else:
+                    vm.BIOSSettings.IOAPICEnabled = 0
                 if 'hwvirtex' in form_data:
                     vm.HWVirtExEnabled = 1
                 else:
