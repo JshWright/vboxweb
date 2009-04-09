@@ -9,35 +9,43 @@
     <body class="index">
         <dl class="breadcrumb">
             <dd><a href="/">Home</a></dd>
-            <dd><a href="/vm_info/${vm.id}">${vm.name}</a></dd>
+            <dd><strong><a href="/vm_info/${vm.id}">${vm.name}</a></strong></dd>
             <dd>Modify</dd>
         </dl>
         <form action="" method="post">
-            <table summary="" style='text-align: right;'><tbody><tr>
-                <th><label for="name">VM Name:</label></th>
-                <td><input type="text" id="name" name="name" /></td>
-            </tr><tr>
-                <th><label for="description">Description:</label></th>
-                <td><input type="text" id="description" name="description" /></td>
-            </tr><tr>
-                <th><label for="memory">Memory Allocated (MB):</label></th>
-                <td><input type="text" id="memory" name="memory" /></td>
-            </tr><tr>
-                <th><label for="vram">Video Memory Allocated (MB):</label></th>
-                <td><input type="text" id="vram" name="vram" /></td>
-            </tr><tr>
-                <th><label for="hwvirtex">Hardware Virtualization Enabled:</label></th>
-                <td><input type="checkbox" id="hwvirtex" name="hwvirtex" /></td>
-            </tr><tr>
-                <th><label for="nestedpaging">Nested Paging Enabled:</label></th>
-                <td><input type="checkbox" id="nestedpaging" name="nestedpaging" /></td>
-            </tr><tr>
-        <td></td>
-        <td>
-          <input type="submit" value="Submit" />
-          <input type="submit" name="cancel" value="Cancel" />
-        </td>
-      </tr></tbody></table>
-    </form>
+          <fieldset>
+            <legend>Modify Virtual Machine</legend>
+          <div class="fields">
+            <div>
+              <label for="name">VM Name:</label>
+              <input type="text" id="name" name="name" />
+            </div>
+            <div>
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description" />
+            </div>
+            <div>
+              <label for="memory">Memory Allocated (<abbr title="Megabytes">MB</abbr>):</label>
+              <input type="text" id="memory" name="memory" />
+            </div>
+            <div>
+              <label for="vram">Video Memory Allocated (<abbr title="Megabytes">MB</abbr>):</label>
+              <input type="text" id="vram" name="vram" />
+            </div>
+            <div>
+              <label for="hwvirtex">Hardware Virtualization Enabled:</label>
+              <input type="checkbox" id="hwvirtex" name="hwvirtex" />
+            </div>
+            <div>
+              <label for="nestedpaging">Nested Paging Enabled:</label>
+              <input type="checkbox" id="nestedpaging" name="nestedpaging" />
+            </div>
+          </div>
+          <div class="form_actions">
+            <input type="submit" value="Submit" />
+            <input type="submit" name="cancel" value="Cancel" />
+          </div>
+          </fieldset>
+        </form>
     </body>
 </html>

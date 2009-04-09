@@ -27,6 +27,9 @@ ul {
 img {
   border:none;
 }
+abbr {
+  cursor: help;
+}
 /*************************
  * Main Layout Structure
  *************************/
@@ -117,20 +120,67 @@ dl.breadcrumb dd:last-child:after {
 /*************************
  * Form Structures
  *************************/
-form table tbody tr th label{
-  margin:0 0.5em 0 0;
+form fieldset{
+  border: thin solid #7D88B3;
+  color: #000;
+  background-color: #98A5D9;
+  background-color: #CCCCCC;
+  padding:2em 0 10px 0;
 }
-form table tbody tr td input{
+form fieldset legend{
+  border: thin solid #7D88B3;
+  background-color: #D4D4D4;
+  font-weight:bold;
+  padding:2px 3px;
+  margin:0 0 2em 20px;
+  margin:0 0 -1.5em -1px;
+  font-size:1.2em;
+}
+form fieldset label{
+  margin:0 0.5em 0 0;
+  font-weight:bold;
+}
+form fieldset input{
   border: thin solid #7D88B3;
   padding: 1px 2px;
-  color:inherit;
   background-color:#EFEFEF;
+  margin-right:0;
 }
-form table tbody tr td input:hover,
-form table tbody tr td input:focus{
+form fieldset input[type="submit"]{
+  cursor: pointer;
+}
+form fieldset input:hover{
+  color:inherit;
+  background-color:#E6E6E6;
+}
+form fieldset input:focus{
   color:inherit;
   background-color:#DEDEDE;
 }
-form table tbody tr td input[type="submit"]{
-  cursor: pointer;
+form fieldset div.fields{
+  width:34em;
+}
+form fieldset div.fields div{
+  margin:0.3em 0;
+}
+form fieldset div.fields div label{
+  float:left;
+  width:18em;
+  text-align:right;
+}
+form fieldset div.fields div input{
+  float:right;
+}
+form fieldset div.fields div input[type="checkbox"]{
+  float:right;
+}
+form fieldset div.fields div:after {
+  content:".";
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+}
+form fieldset div.form_actions{
+  text-align:center;
 }
