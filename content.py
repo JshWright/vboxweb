@@ -65,6 +65,10 @@ class Root:
 
     @cherrypy.expose
     def index(self):
+        if self.vbox.version[:3] != '2.2':
+            error_message = "VBoxWeb only supports VirtualBox version 2.2.x, you are running VirtualBox %s" % (self.vbox.version,)
+            tmpl = loader.load('error.html')
+            return tmpl.generate(error_message=error_message).render('html', doctype='html')
         tmpl = loader.load('index.html')
         return tmpl.generate(vms=self.vbox.getMachines()).render('html', doctype='html')
 
