@@ -11,7 +11,7 @@ body {
 h1 {
   letter-spacing: -1px;
   color:#ffffff;
-  margin:1%;
+  margin:0.1%;
 }
 h3, h4, h5 {
   clear:both;
@@ -43,10 +43,8 @@ abbr {
   border-bottom: thin solid #ccc;
   color: #333;
   background-color: #ccc;
-/*
   background-color: #7D88B3;
   background-image: url(/media/images/layout/header1.png);
-*/
 }
 #leftcolumn {
   position:absolute;
