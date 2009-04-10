@@ -19,50 +19,142 @@
         <h4>${vm.description}&#160;</h4>
         <h5>Current State: $state</h5>
         <h5>Guest OS: ${guest_os}</h5>
-        <div class='vm_settings'>
-        <h5>Settings</h5>
-        <ul>
-            <li>Memory Allocated: ${vm.memorySize}MB</li>
-            <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
-            <li>Boot Order: todo</li>
-            <li>ACPI: 
-                <py:choose test="vm.BIOSSettings.ACPIEnabled">
-                    <py:when test="False">Off</py:when>
-                    <py:when test="True">On</py:when>
+        <div class="vm_settings">
+          <div class="vm_settings_section vm_settings_general">
+            <h5>General</h5>
+            <ul>
+                <li>Base Memory Allocated: ${vm.memorySize}MB</li>
+                <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
+                <li>Boot Order: TODO</li>
+                <li>ACPI:
+                    <py:choose test="vm.BIOSSettings.ACPIEnabled">
+                        <py:when test="False">Off</py:when>
+                        <py:when test="True">On</py:when>
+                    </py:choose>
+                </li>
+                <li>IO APIC:
+                    <py:choose test="vm.BIOSSettings.IOAPICEnabled">
+                        <py:when test="False">Off</py:when>
+                        <py:when test="True">On</py:when>
+                    </py:choose>
+                </li>
+                <li>Hardware Virtualization:
+                    <py:choose test="vm.HWVirtExEnabled">
+                        <py:when test="0">Off</py:when>
+                        <py:when test="1">On</py:when>
+                        <py:when test="2">Default</py:when>
+                    </py:choose>
+                </li>
+                <li>Nested Paging:
+                    <py:choose test="vm.HWVirtExNestedPagingEnabled">
+                        <py:when test="False">Off</py:when>
+                        <py:when test="True">On</py:when>
+                    </py:choose>
+                </li>
+                <li>PAE/NX:
+                    <py:choose test="vm.PAEEnabled">
+                      <py:when test="False">Disabled</py:when>
+                      <py:when test="True">Enabled</py:when>
+                    </py:choose>
+                </li>
+                <li>3D Acceleration:
+                    <py:choose test="vm.accelerate3DEnabled">
+                      <py:when test="False">Disabled</py:when>
+                      <py:when test="True">Enabled</py:when>
+                    </py:choose>
+                </li>
+            </ul>
+          </div>
+          <div class="vm_settings_section vm_settings_hard_disks">
+            <h5>Hard Disks</h5>
+            <ul>
+                <li>TODO</li>
+            </ul>
+          </div>
+          <div class="vm_settings_section vm_settings_cd_dvd-rom">
+            <h5>CD/DVD-ROM</h5>
+            <ul>
+                <li>Drive State:
+                  <py:choose test="vm.DVDDrive.state">
+                    <py:when test="1">Not Mounted</py:when>
+                    <py:when test="2">
+                      Image Mounted
+                    </py:when>
+                    <py:when test="3">
+                      Host Drive Mounted
+                    </py:when>
+                  </py:choose>
+                </li>
+            </ul>
+          </div>
+          <div class="vm_settings_section vm_settings_floppy">
+            <h5>Floppy</h5>
+            <ul>
+                <li>Drive State:
+                  <py:choose test="vm.floppyDrive.state">
+                    <py:when test="1">Not Mounted</py:when>
+                    <py:when test="2">
+                      Image Mounted
+                    </py:when>
+                    <py:when test="3">
+                      Host Drive Mounted
+                    </py:when>
+                  </py:choose>
+                </li>
+            </ul>
+          </div>
+          <div class="vm_settings_section vm_settings_audio">
+            <h5>Audio</h5>
+            <ul>
+              <li>State:
+                <py:choose test="vm.audioAdapter.enabled">
+                  <py:when test="True">
+                    Enabled
+                  </py:when>
+                  <py:when test="False">
+                    Disabled
+                  </py:when>
                 </py:choose>
-            </li>
-            <li>IO APIC: 
-                <py:choose test="vm.BIOSSettings.IOAPICEnabled">
-                    <py:when test="False">Off</py:when>
-                    <py:when test="True">On</py:when>
-                </py:choose>
-            </li>
-            <li>Hardware Virtualization:
-                <py:choose test="vm.HWVirtExEnabled">
-                    <py:when test="0">Off</py:when>
-                    <py:when test="1">On</py:when>
-                    <py:when test="2">Default</py:when>
-                </py:choose>
-            </li>
-            <li>Nested Paging:
-                <py:choose test="vm.HWVirtExNestedPagingEnabled">
-                    <py:when test="False">Off</py:when>
-                    <py:when test="True">On</py:when>
-                </py:choose>
-            </li>
-            <li>PAE/NX:
-                <py:choose test="vm.PAEEnabled">
-                  <py:when test="False">Disabled</py:when>
-                  <py:when test="True">Enabled</py:when>
-                </py:choose>
-            </li>
-            <li>3D Acceleration:
-                <py:choose test="vm.accelerate3DEnabled">
-                  <py:when test="False">Disabled</py:when>
-                  <py:when test="True">Enabled</py:when>
-                </py:choose>
-            </li>
-        </ul>
+              </li>
+              <py:choose test="vm.audioAdapter.enabled">
+                <py:when test="True">
+                  <li>
+                    Driver:
+                    <py:choose test="vm.audioAdapter.audioDriver">
+                      <py:when test="0">NULL</py:when>
+                      <py:when test="1">WinMM</py:when>
+                      <py:when test="2">OSS</py:when>
+                      <py:when test="3">ALSA</py:when>
+                      <py:when test="4">DirectSound</py:when>
+                      <py:when test="5">CoreAudio</py:when>
+                      <py:when test="6">MMPM</py:when>
+                      <py:when test="7">PulseAudio</py:when>
+                      <py:when test="8">Solaris Audio</py:when>
+                    </py:choose>
+                  </li>
+                  <li>
+                    Controller:
+                    <py:choose test="vm.audioAdapter.audioController">
+                      <py:when test="0">ICH AC97</py:when>
+                      <py:when test="1">SoundBlaster 16</py:when>
+                    </py:choose>
+                  </li>
+                </py:when>
+              </py:choose>
+            </ul>
+          </div>
+          <div class="vm_settings_section vm_settings_serial_ports">
+            <h5>Serial Ports</h5>
+            <ul>
+                <li>TODO</li>
+            </ul>
+          </div>
+          <div class="vm_settings_section vm_settings_shared_folders">
+            <h5>Shared Folders</h5>
+            <ul>
+                <li>TODO</li>
+            </ul>
+          </div>
         </div>
         <div class='vm_actions'>
         <h5>Actions:</h5>
