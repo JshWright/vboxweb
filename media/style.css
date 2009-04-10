@@ -42,8 +42,11 @@ abbr {
   height: 100px;
   border-bottom: thin solid #ccc;
   color: #333;
+  background-color: #ccc;
+/*
   background-color: #7D88B3;
   background-image: url(/media/images/layout/header1.png);
+*/
 }
 #leftcolumn {
   position:absolute;
