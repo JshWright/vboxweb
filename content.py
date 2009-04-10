@@ -59,7 +59,7 @@ class Root:
         session = self.mgr.getSessionObject(self.vbox)
         try:
             self.vbox.openExistingSession(session, uuid)
-        except Exception,e:
+        except xpcom.COMException,e:
             return "Unable to process action: %s" % e
         return session
 
@@ -112,6 +112,14 @@ class Root:
                 vm.description = form_data['description']
                 vm.memorySize = form_data['memory']
                 vm.VRAMSize = form_data['vram']
+                if 'acpi' in form_data:
+                    vm.BIOSSettings.ACPIEnabled = 1
+                else:
+                    vm.BIOSSettings.ACPIEnabled = 0
+                if 'ioapic' in form_data:
+                    vm.BIOSSettings.IOAPICEnabled = 1
+                else:
+                    vm.BIOSSettings.IOAPICEnabled = 0
                 if 'hwvirtex' in form_data:
                     vm.HWVirtExEnabled = 1
                 else:
@@ -123,7 +131,7 @@ class Root:
                 vm.saveSettings()
                 session.close()
                 raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
-            except Exception,e:
+            except xpcom.COMException,e:
                 error_message = "Unable to modify VM. %s" % (e,)
                 tmpl = loader.load('error.html')
                 return tmpl.generate(error_message=error_message).render('html', doctype='html')
