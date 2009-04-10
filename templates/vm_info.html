@@ -25,7 +25,7 @@
             <ul>
                 <li>Base Memory Allocated: ${vm.memorySize}MB</li>
                 <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
-                <li>Boot Order: todo</li>
+                <li>Boot Order: TODO</li>
                 <li>ACPI:
                     <py:choose test="vm.BIOSSettings.ACPIEnabled">
                         <py:when test="False">Off</py:when>
@@ -68,7 +68,7 @@
           <div class="vm_settings_section vm_settings_hard_disks">
             <h5>Hard Disks</h5>
             <ul>
-                <li>Todo</li>
+                <li>TODO</li>
             </ul>
           </div>
           <div class="vm_settings_section vm_settings_cd_dvd-rom">
@@ -119,6 +119,20 @@
               <py:choose test="vm.audioAdapter.enabled">
                 <py:when test="True">
                   <li>
+                    Driver:
+                    <py:choose test="vm.audioAdapter.audioDriver">
+                      <py:when test="0">NULL</py:when>
+                      <py:when test="1">WinMM</py:when>
+                      <py:when test="2">OSS</py:when>
+                      <py:when test="3">ALSA</py:when>
+                      <py:when test="4">DirectSound</py:when>
+                      <py:when test="5">CoreAudio</py:when>
+                      <py:when test="6">MMPM</py:when>
+                      <py:when test="7">PulseAudio</py:when>
+                      <py:when test="8">Solaris Audio</py:when>
+                    </py:choose>
+                  </li>
+                  <li>
                     Controller:
                     <py:choose test="vm.audioAdapter.audioController">
                       <py:when test="0">ICH AC97</py:when>
@@ -132,13 +146,13 @@
           <div class="vm_settings_section vm_settings_serial_ports">
             <h5>Serial Ports</h5>
             <ul>
-                <li>Todo</li>
+                <li>TODO</li>
             </ul>
           </div>
           <div class="vm_settings_section vm_settings_shared_folders">
             <h5>Shared Folders</h5>
             <ul>
-                <li>Todo</li>
+                <li>TODO</li>
             </ul>
           </div>
         </div>
