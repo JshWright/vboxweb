@@ -118,8 +118,7 @@
                   </py:when>
                 </py:choose>
               </li>
-              <py:choose test="vm.audioAdapter.enabled">
-                <py:when test="True">
+              <py:if test="vm.audioAdapter.enabled is True">
                   <li>
                     Driver:
                     <py:choose test="vm.audioAdapter.audioDriver">
@@ -141,8 +140,7 @@
                       <py:when test="1">SoundBlaster 16</py:when>
                     </py:choose>
                   </li>
-                </py:when>
-              </py:choose>
+              </py:if>
             </ul>
           </div>
           <div class="vm_settings_section vm_settings_serial_ports">
