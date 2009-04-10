@@ -84,8 +84,9 @@ class Root:
             if device != 0:
                 boot_devices.append(device)
         disk_attachments = vm.getHardDiskAttachments()
+        shared_folders = vm.getSharedFolders()
         tmpl = loader.load('vm_info.html')
-        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, boot_devices=boot_devices).render('html', doctype='html')
+        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
 
     @cherrypy.expose
     def control_vm(self, uuid, action):

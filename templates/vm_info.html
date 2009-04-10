@@ -174,7 +174,14 @@
           <div class="vm_settings_section vm_settings_shared_folders">
             <h5>Shared Folders</h5>
             <ul>
-                <li>TODO</li>
+              <li py:for="shared_folder in shared_folders">
+                ${shared_folder.name}
+                <ul>
+                  <li>Accessible: ${shared_folder.accessible}</li>
+                  <li>Writable: ${shared_folder.writable}</li>
+                  <li>Host Path:<br/>${shared_folder.hostPath}</li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
