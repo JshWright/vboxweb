@@ -103,6 +103,9 @@ class Root:
                 console.reset()
             elif action == 'pause':
                 console.pause()
+            elif action == 'save_state':
+                progress = console.saveState()
+                progress.waitForCompletion(-1)
             elif action == 'resume':
                 console.resume()
         session.close()
