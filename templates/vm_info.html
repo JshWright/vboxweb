@@ -119,27 +119,27 @@
                 </py:choose>
               </li>
               <py:if test="vm.audioAdapter.enabled is True">
-                  <li>
-                    Driver:
-                    <py:choose test="vm.audioAdapter.audioDriver">
-                      <py:when test="0">NULL</py:when>
-                      <py:when test="1">WinMM</py:when>
-                      <py:when test="2">OSS</py:when>
-                      <py:when test="3">ALSA</py:when>
-                      <py:when test="4">DirectSound</py:when>
-                      <py:when test="5">CoreAudio</py:when>
-                      <py:when test="6">MMPM</py:when>
-                      <py:when test="7">PulseAudio</py:when>
-                      <py:when test="8">Solaris Audio</py:when>
-                    </py:choose>
-                  </li>
-                  <li>
-                    Controller:
-                    <py:choose test="vm.audioAdapter.audioController">
-                      <py:when test="0">ICH AC97</py:when>
-                      <py:when test="1">SoundBlaster 16</py:when>
-                    </py:choose>
-                  </li>
+                <li>
+                  Driver:
+                  <py:choose test="vm.audioAdapter.audioDriver">
+                    <py:when test="0">NULL</py:when>
+                    <py:when test="1">WinMM</py:when>
+                    <py:when test="2">OSS</py:when>
+                    <py:when test="3">ALSA</py:when>
+                    <py:when test="4">DirectSound</py:when>
+                    <py:when test="5">CoreAudio</py:when>
+                    <py:when test="6">MMPM</py:when>
+                    <py:when test="7">PulseAudio</py:when>
+                    <py:when test="8">Solaris Audio</py:when>
+                  </py:choose>
+                </li>
+                <li>
+                  Controller:
+                  <py:choose test="vm.audioAdapter.audioController">
+                    <py:when test="0">ICH AC97</py:when>
+                    <py:when test="1">SoundBlaster 16</py:when>
+                  </py:choose>
+                </li>
               </py:if>
             </ul>
           </div>
