@@ -155,9 +155,20 @@ div.vm_settings_section h5 {
 div.vm_settings ol{
   margin: 0 0 0 2em;
 }
-div.vm_actions {
+div.vm_actions:after {
+  content:".";
+  display:block;
+  height:0;
   clear:both;
-  padding: 0px 0px 0px 10px;
+  visibility:hidden;
+}
+div.vm_actions h5{
+  float:left;
+}
+div.vm_actions ul li{
+  list-style-type: none;
+  float:left;
+  margin: 0 0.5em;
 }
 
 /*************************
