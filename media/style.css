@@ -119,11 +119,18 @@ dl.breadcrumb:after {
 /*************************
  * SubSections
  *************************/
-.vm_settings {
+div.vm_settings {
   padding: 0px 0px 10px 10px;
 }
-
-.vm_actions {
+div.vm_settings_section{
+  float:left;
+  width: 30%;
+/*
+  border:thin solid black;
+*/
+}
+div.vm_actions {
+  clear:both;
   padding: 0px 0px 0px 10px;
 }
 
