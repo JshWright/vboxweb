@@ -70,7 +70,7 @@ class Root:
             tmpl = loader.load('error.html')
             return tmpl.generate(error_message=error_message).render('html', doctype='html')
         tmpl = loader.load('index.html')
-        return tmpl.generate(vms=self.vbox.getMachines()).render('html', doctype='html')
+        return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
 
     @cherrypy.expose
     def vm_info(self, uuid):

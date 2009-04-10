@@ -27,6 +27,19 @@ abbr {
   cursor: help;
 }
 /*************************
+ * Links
+ *************************/
+a, a:visited{
+  color:#000;
+  background:transparent;
+}
+a:hover,a:focus{
+  color:#333;
+  background:transparent;
+  text-decoration: none;
+  border-bottom:thin dotted #000;
+}
+/*************************
  * Main Layout Structure
  *************************/
 #wrapper {
@@ -74,6 +87,7 @@ abbr {
   background: #D9D9D9;
   padding: 5px;
   display: inline;
+  overflow:auto;
 }
 #footer {
   position:absolute;
@@ -179,4 +193,32 @@ form fieldset div.fields div:after {
 }
 form fieldset div.form_actions{
   text-align:center;
+}
+/*************************
+ * OS images for lists
+ *************************/
+ul.list_vms {
+  margin-left:1em;
+  margin-left:0;
+}
+ul.list_vms a {
+  font-weight:bold;
+}
+ul.list_vms li{
+  list-style-type: none;
+  background-image: url(/media/images/oses/other.png);
+  background-image: url(/media/images/oses/temp.png);
+  background-repeat: no-repeat;
+  background-position: 0 0.4em;
+  padding: 1em 1em 1em 3em;
+}
+ul.list_vms li.windowsxp,
+ul.list_vms li.windowsvista,
+ul.list_vms li.ubuntu{
+  background-image: url(/media/images/oses/temp.png);
+}
+ul.list_vms li li{
+  background-image: none;
+  list-style-type: disc;
+  padding: 0;
 }
