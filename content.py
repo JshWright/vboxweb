@@ -78,8 +78,9 @@ class Root:
         state = VM_STATES[int(vm.state)]
         os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
         guest_os = os_type_obj.description
+        disk_attachments = vm.getHardDiskAttachments()
         tmpl = loader.load('vm_info.html')
-        return tmpl.generate(vm=vm, state=state, guest_os=guest_os).render('html', doctype='html')
+        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments).render('html', doctype='html')
 
     @cherrypy.expose
     def control_vm(self, uuid, action):
