@@ -150,7 +150,11 @@ class Root:
                          'memory': vm.memorySize,
                          'vram': vm.VRAMSize,
                          'hwvirtex': False,
-                         'nestedpaging': vm.HWVirtExNestedPagingEnabled}
+                         'nestedpaging': vm.HWVirtExNestedPagingEnabled,
+                         'pae': vm.PAEEnabled,
+                         '3daccel': vm.accelerate3DEnabled,
+                         'acpi': vm.BIOSSettings.ACPIEnabled,
+                         'ioapic': vm.BIOSSettings.IOAPICEnabled}
             if vm.HWVirtExEnabled == 1:
                 form_data['hwvirtex'] = True
             filler = HTMLFormFiller(data=form_data)
