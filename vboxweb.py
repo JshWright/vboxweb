@@ -43,8 +43,18 @@ except ImportError:
 
 from content import Root
 
-def main():
+def main(argv):
+
+    port = 8080
+
+    if len(argv) > 1:
+        i = iter(argv)
+        for arg in i:
+            if arg in ('-p', '--port'):
+                port = i.next()
+
     cherrypy.config.update({
+        'server.socket_port': port,
         'tools.encode.on': True, 'tools.encode.encoding': 'utf-8',
         'tools.decode.on': True,
         'tools.trailing_slash.on': True,
@@ -59,4 +69,4 @@ def main():
     })
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv)
