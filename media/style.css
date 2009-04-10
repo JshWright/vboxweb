@@ -17,10 +17,23 @@ h1 {
   letter-spacing: -1px;
   color:#ffffff;
   margin:0.1%;
+  font-size:2.5em;
 }
 h3, h4, h5 {
   clear:both;
   margin-bottom:0.5em;
+}
+h2{
+  font-size:1.8em;
+}
+h3{
+  font-size:1.6em;
+}
+h4{
+  font-size:1.4em;
+}
+h5{
+  font-size:1.2em;
 }
 ul {
   margin:0.5em 2em;
@@ -130,6 +143,10 @@ div.vm_settings {
 div.vm_settings_section{
   float:left;
   width: 30%;
+}
+div.vm_settings_section h5 {
+  width:95%;
+  border-bottom: thin solid black;
 }
 div.vm_settings ol{
   margin: 0 0 0 2em;
