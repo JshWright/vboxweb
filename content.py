@@ -99,7 +99,7 @@ class Root:
             console = session.console
             if action == 'power_off':
                 console.powerDown()
-            elif action == 'pause':
+            elif action == 'reset':
                 console.reset()
             elif action == 'pause':
                 console.pause()
