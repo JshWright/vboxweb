@@ -25,7 +25,18 @@
             <ul>
                 <li>Base Memory Allocated: ${vm.memorySize}MB</li>
                 <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
-                <li>Boot Order: TODO</li>
+                <li>Boot Order:
+                    <ol>
+                        <li py:for="device in boot_devices">
+                            <py:choose test="device">
+                                <py:when test="1">Floppy</py:when>
+                                <py:when test="2">CD/DVD-ROM</py:when>
+                                <py:when test="3">Hard Disk</py:when>
+                                <py:when test="4">Network</py:when>
+                            </py:choose>
+                        </li>
+                    </ol>
+                </li>
                 <li>ACPI:
                     <py:choose test="vm.BIOSSettings.ACPIEnabled">
                         <py:when test="False">Off</py:when>

@@ -78,9 +78,14 @@ class Root:
         state = VM_STATES[int(vm.state)]
         os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
         guest_os = os_type_obj.description
+        boot_devices = []
+        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
+            device = vm.getBootOrder(position)
+            if device != 0:
+                boot_devices.append(device)
         disk_attachments = vm.getHardDiskAttachments()
         tmpl = loader.load('vm_info.html')
-        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments).render('html', doctype='html')
+        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, boot_devices=boot_devices).render('html', doctype='html')
 
     @cherrypy.expose
     def control_vm(self, uuid, action):
