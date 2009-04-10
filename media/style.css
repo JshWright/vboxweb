@@ -130,9 +130,9 @@ div.vm_settings {
 div.vm_settings_section{
   float:left;
   width: 30%;
-/*
-  border:thin solid black;
-*/
+}
+div.vm_settings ol{
+  margin: 0 0 0 2em;
 }
 div.vm_actions {
   clear:both;
