@@ -31,6 +31,8 @@ h3{
 }
 h4{
   font-size:1.4em;
+  background-color:#ccc;
+  padding: 0.1em 0.2em;
 }
 h5{
   font-size:1.2em;
@@ -81,12 +83,12 @@ a:hover,a:focus{
   position:absolute;
   top:105px;
   left:0;
-  right:9%;
   bottom:30px;
   border: 1px solid #ccc;
   color: #333;
   background: #98A5D9;
   width: 10%;
+  width: 8em;
 }
 #leftcolumn ul {
   margin:0.5em 0 0 1em;
@@ -98,6 +100,7 @@ a:hover,a:focus{
   position:absolute;
   top:105px;
   left:10.5%;
+  left:8.5em;
   right:0;
   bottom:30px;
   border: 1px solid #ccc;
@@ -143,6 +146,7 @@ div.vm_settings {
 div.vm_settings_section{
   float:left;
   width: 30%;
+  height: 16em;
 }
 div.vm_settings_section h5 {
   width:95%;
