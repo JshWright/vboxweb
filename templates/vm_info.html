@@ -23,24 +23,25 @@
           <h5>Actions:</h5>
           <ul>
             <py:if test="state in ('Powered Off', 'Saved', 'Aborted')">
-              <li><a href="/control_vm/${vm.id}/power_up" title="Power Up VM"><img src="/media/images/control/control_play_blue.png" alt="Power Up VM"/></a></li>
+              <li><a href="/control_vm/${vm.id}/power_up" title="Power Up VM" class="please_wait"><img src="/media/images/control/control_play_blue.png" alt="Power Up VM"/></a></li>
             </py:if>
             <py:if test="state in ('Running', 'Paused', 'Stuck')">
-              <li><a href="/control_vm/${vm.id}/power_off" title="Power Off VM"><img src="/media/images/control/control_stop_blue.png" alt="Power Off VM"/></a></li>
+              <li><a href="/control_vm/${vm.id}/power_off" title="Power Off VM" class="please_wait"><img src="/media/images/control/control_stop_blue.png" alt="Power Off VM"/></a></li>
             </py:if>
             <py:if test="state == 'Running'">
-              <li><a href="/control_vm/${vm.id}/reset" title="Reset VM"><img src="/media/images/control/control_repeat_blue.png" alt="Reset VM"/></a></li>
+              <li><a href="/control_vm/${vm.id}/reset" title="Reset VM" class="please_wait"><img src="/media/images/control/control_repeat_blue.png" alt="Reset VM"/></a></li>
             </py:if>
             <py:if test="state == 'Running'">
-              <li><a href="/control_vm/${vm.id}/pause" title="Pause VM"><img src="/media/images/control/control_pause_blue.png" alt="Pause VM"/></a></li>
+              <li><a href="/control_vm/${vm.id}/pause" title="Pause VM" class="please_wait"><img src="/media/images/control/control_pause_blue.png" alt="Pause VM"/></a></li>
             </py:if>
             <py:if test="state in ('Running', 'Paused')">
-              <li><a href="/control_vm/${vm.id}/save_state" title="Save VM State"><img src="/media/images/control/control_equalizer_blue.png" alt="Save VM State"/></a></li>
+              <li><a href="/control_vm/${vm.id}/save_state" title="Save VM State" class="please_wait"><img src="/media/images/control/control_equalizer_blue.png" alt="Save VM State"/></a></li>
             </py:if>
             <py:if test="state == 'Paused'">
-              <li><a href="/control_vm/${vm.id}/resume" title="Resume VM"><img src="/media/images/control/control_fastforward_blue.png" alt="Resume VM"/></a></li>
+              <li><a href="/control_vm/${vm.id}/resume" title="Resume VM" class="please_wait"><img src="/media/images/control/control_fastforward_blue.png" alt="Resume VM"/></a></li>
             </py:if>
           </ul>
+          <div class="foo"></div>
         </div>
         <div class="vm_settings">
           <div class="vm_settings_section vm_settings_general">
