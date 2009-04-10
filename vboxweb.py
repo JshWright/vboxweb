@@ -27,6 +27,15 @@
 
 import os, sys
 
+USAGE = """
+
+VBoxWeb - A web-based frontend for Sun's VirtualBox
+
+Usage:
+    -p, --port [port number]
+        Set the port number VBoxWeb should listen on
+"""
+
 try:
     import cherrypy
     major_version = int(cherrypy.__version__[0])
@@ -49,9 +58,14 @@ def main(argv):
 
     if len(argv) > 1:
         i = iter(argv)
+        executable = i.next()
         for arg in i:
             if arg in ('-p', '--port'):
                 port = i.next()
+            else:
+                print "\nUnknown command: %s" % arg
+                print USAGE
+                sys.exit(1)
 
     cherrypy.config.update({
         'server.socket_port': port,
