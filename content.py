@@ -128,6 +128,14 @@ class Root:
                     vm.HWVirtExNestedPagingEnabled = 1
                 else:
                     vm.HWVirtExNestedPagingEnabled = 0
+                if 'pae' in form_data:
+                    vm.PAEEnabled = 1
+                else:
+                    vm.PAEEnabled = 0
+                if '3daccel' in form_data:
+                    vm.accelerate3DEnabled = 1
+                else:
+                    vm.accelerate3DEnabled = 0
                 vm.saveSettings()
                 session.close()
                 raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
