@@ -100,6 +100,8 @@ class Root:
             if action == 'power_off':
                 console.powerDown()
             elif action == 'pause':
+                console.reset()
+            elif action == 'pause':
                 console.pause()
             elif action == 'resume':
                 console.resume()

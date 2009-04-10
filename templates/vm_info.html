@@ -195,6 +195,9 @@
                 <li><a href="/control_vm/${vm.id}/power_off">Power Off VM</a></li>
             </py:if>
             <py:if test="state == 'Running'">
+                <li><a href="/control_vm/${vm.id}/reset">Reset VM</a></li>
+            </py:if>
+            <py:if test="state == 'Running'">
                 <li><a href="/control_vm/${vm.id}/pause">Pause VM</a></li>
                 <li>Save State</li>
             </py:if>
