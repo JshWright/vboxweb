@@ -32,6 +32,8 @@ USAGE = """
 VBoxWeb - A web-based frontend for Sun's VirtualBox
 
 Usage:
+    -h, --help
+        Print this usage list and exit
     -p, --port [port number]
         Set the port number VBoxWeb should listen on
 """
@@ -62,6 +64,9 @@ def main(argv):
         for arg in i:
             if arg in ('-p', '--port'):
                 port = i.next()
+            if arg in ('-h', '--help'):
+                print USAGE
+                sys.exit(0)
             else:
                 print "\nUnknown command: %s" % arg
                 print USAGE
