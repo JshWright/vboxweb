@@ -211,14 +211,17 @@ ul.list_vms li{
   background-repeat: no-repeat;
   background-position: 0 0.4em;
   padding: 1em 1em 1em 3em;
+  border-bottom: thin solid black;
 }
 ul.list_vms li.windowsxp,
 ul.list_vms li.windowsvista,
 ul.list_vms li.ubuntu{
   background-image: url(/media/images/oses/temp.png);
 }
-ul.list_vms li li{
+ul.list_vms li ul li{
   background-image: none;
   list-style-type: disc;
   padding: 0;
+  margin:0 1.5em 0 0;
+  border:none;
 }
