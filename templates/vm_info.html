@@ -80,7 +80,18 @@
             <h5>Hard Disks</h5>
             <ul>
                 <li py:for="attachment in disk_attachments">
-                    ${attachment.hardDisk.name}
+                  ${attachment.hardDisk.name}
+                  <ul>
+                    <li>Format: ${attachment.hardDisk.format}</li>
+                    <li>Size: ${attachment.hardDisk.logicalSize}MB</li>
+                    <li>Type:
+                      <py:choose test="attachment.hardDisk.type">
+                        <py:when test="0"><span title="Normal: attached directly or indirectly, preserved when taking snapshots">Normal</span></py:when>
+                        <py:when test="1"><span title="Immutable: attached indirectly, changes are wiped out after powering off the virtual machine">Immutable</span></py:when>
+                        <py:when test="2"><span title="Write Through: attached directly, ignored when taking snapshots">Write Through</span></py:when>
+                      </py:choose>
+                    </li>
+                  </ul>
                 </li>
             </ul>
           </div>
