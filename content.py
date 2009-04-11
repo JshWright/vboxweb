@@ -82,7 +82,7 @@ class Root:
             elif action == 'resume':
                 console.resume()
         session.close()
-        raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
+        raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
 
     @cherrypy.expose
     def modify_vm(self, uuid, **form_data):
@@ -123,7 +123,7 @@ class Root:
                     vm.accelerate3DEnabled = 0
                 vm.saveSettings()
                 session.close()
-                raise cherrypy.HTTPRedirect('/vm_info/' + uuid)
+                raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
             except xpcom.COMException,e:
                 error_message = "Unable to modify VM. %s" % (e,)
                 tmpl = loader.load('error.html')
