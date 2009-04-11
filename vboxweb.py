@@ -58,7 +58,7 @@ import xpcom.vboxxpcom
 import xpcom
 import xpcom.components
 
-from content import Root
+from content import Root, VM
 
 class LocalManager:
     def getSessionObject(self, vbox):
@@ -93,6 +93,7 @@ def main(argv):
     })
 
     root = Root(LocalManager(), vbox)
+    root.vm = VM(LocalManager(), vbox)
 
     cherrypy.quickstart(root, '/', {
         '/media': {

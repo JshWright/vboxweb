@@ -62,22 +62,6 @@ class Root:
         return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
 
     @cherrypy.expose
-    def vm_info(self, uuid):
-        vm = self.vbox.getMachine(uuid)
-        state = VM_STATES[int(vm.state)]
-        os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
-        guest_os = os_type_obj.description
-        boot_devices = []
-        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
-            device = vm.getBootOrder(position)
-            if device != 0:
-                boot_devices.append(device)
-        disk_attachments = vm.getHardDiskAttachments()
-        shared_folders = vm.getSharedFolders()
-        tmpl = loader.load('vm_info.html')
-        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
-
-    @cherrypy.expose
     def control_vm(self, uuid, action):
         if action == 'power_up':
             session = self.mgr.getSessionObject(self.vbox)
@@ -161,3 +145,25 @@ class Root:
             filler = HTMLFormFiller(data=form_data)
             tmpl = loader.load('modify_vm.html')
             return tmpl.generate(vm=vm).filter(filler).render('html', doctype='html')
+
+class VM:
+
+    def __init__(self, mgr, vbox):
+        self.mgr = mgr
+        self.vbox = vbox
+
+    @cherrypy.expose
+    def info(self, uuid):
+        vm = self.vbox.getMachine(uuid)
+        state = VM_STATES[int(vm.state)]
+        os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
+        guest_os = os_type_obj.description
+        boot_devices = []
+        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
+            device = vm.getBootOrder(position)
+            if device != 0:
+                boot_devices.append(device)
+        disk_attachments = vm.getHardDiskAttachments()
+        shared_folders = vm.getSharedFolders()
+        tmpl = loader.load('vm_info.html')
+        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
