@@ -29,12 +29,6 @@ import os, sys, traceback, cherrypy
 from genshi.template import TemplateLoader
 from genshi.filters import HTMLFormFiller
 
-sys.path.append('/usr/lib/virtualbox')
-
-import xpcom.vboxxpcom
-import xpcom
-import xpcom.components
-
 loader = TemplateLoader(
     os.path.join(os.path.dirname(__file__), 'templates'),
     auto_reload=True
@@ -46,14 +40,9 @@ VM_STATES = (None, 'Powered Off', 'Saved', 'Aborted', 'Running', 'Paused',
 
 class Root:
 
-    def __init__(self):
-
-        class LocalManager:
-            def getSessionObject(self, vbox):
-                return xpcom.components.classes["@virtualbox.org/Session;1"].createInstance()
-
-        self.mgr = LocalManager()
-        self.vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
+    def __init__(self, mgr, vbox):
+        self.mgr = mgr
+        self.vbox = vbox
 
     def get_existing_session(self, uuid):
         session = self.mgr.getSessionObject(self.vbox)

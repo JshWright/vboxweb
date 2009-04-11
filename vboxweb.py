@@ -52,7 +52,19 @@ except ImportError:
           """
     sys.exit()
 
+sys.path.append('/usr/lib/virtualbox')
+
+import xpcom.vboxxpcom
+import xpcom
+import xpcom.components
+
 from content import Root
+
+class LocalManager:
+    def getSessionObject(self, vbox):
+        return xpcom.components.classes["@virtualbox.org/Session;1"].createInstance()
+
+vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
 
 def main(argv):
 
@@ -80,7 +92,9 @@ def main(argv):
         'tools.staticdir.root': os.path.abspath(os.path.dirname(__file__)),
     })
 
-    cherrypy.quickstart(Root(), '/', {
+    root = Root(LocalManager(), vbox)
+
+    cherrypy.quickstart(root, '/', {
         '/media': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': 'media'
