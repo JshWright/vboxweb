@@ -78,8 +78,15 @@ class Root:
         state = VM_STATES[int(vm.state)]
         os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
         guest_os = os_type_obj.description
+        boot_devices = []
+        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
+            device = vm.getBootOrder(position)
+            if device != 0:
+                boot_devices.append(device)
+        disk_attachments = vm.getHardDiskAttachments()
+        shared_folders = vm.getSharedFolders()
         tmpl = loader.load('vm_info.html')
-        return tmpl.generate(vm=vm, state=state, guest_os=guest_os).render('html', doctype='html')
+        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
 
     @cherrypy.expose
     def control_vm(self, uuid, action):
@@ -92,8 +99,13 @@ class Root:
             console = session.console
             if action == 'power_off':
                 console.powerDown()
+            elif action == 'reset':
+                console.reset()
             elif action == 'pause':
                 console.pause()
+            elif action == 'save_state':
+                progress = console.saveState()
+                progress.waitForCompletion(-1)
             elif action == 'resume':
                 console.resume()
         session.close()

@@ -19,13 +19,48 @@
         <h4>${vm.description}&#160;</h4>
         <h5>Current State: $state</h5>
         <h5>Guest OS: ${guest_os}</h5>
+        <div class='vm_actions'>
+          <h5>Actions:</h5>
+          <ul>
+            <py:if test="state in ('Powered Off', 'Saved', 'Aborted')">
+              <li><a href="/control_vm/${vm.id}/power_up" title="Power Up VM" class="please_wait"><img src="/media/images/control/control_play_blue.png" alt="Power Up VM"/></a></li>
+            </py:if>
+            <py:if test="state in ('Running', 'Paused', 'Stuck')">
+              <li><a href="/control_vm/${vm.id}/power_off" title="Power Off VM" class="please_wait"><img src="/media/images/control/control_stop_blue.png" alt="Power Off VM"/></a></li>
+            </py:if>
+            <py:if test="state == 'Running'">
+              <li><a href="/control_vm/${vm.id}/reset" title="Reset VM" class="please_wait"><img src="/media/images/control/control_repeat_blue.png" alt="Reset VM"/></a></li>
+            </py:if>
+            <py:if test="state == 'Running'">
+              <li><a href="/control_vm/${vm.id}/pause" title="Pause VM" class="please_wait"><img src="/media/images/control/control_pause_blue.png" alt="Pause VM"/></a></li>
+            </py:if>
+            <py:if test="state in ('Running', 'Paused')">
+              <li><a href="/control_vm/${vm.id}/save_state" title="Save VM State" class="please_wait"><img src="/media/images/control/control_equalizer_blue.png" alt="Save VM State"/></a></li>
+            </py:if>
+            <py:if test="state == 'Paused'">
+              <li><a href="/control_vm/${vm.id}/resume" title="Resume VM" class="please_wait"><img src="/media/images/control/control_fastforward_blue.png" alt="Resume VM"/></a></li>
+            </py:if>
+          </ul>
+          <div class="foo"></div>
+        </div>
         <div class="vm_settings">
           <div class="vm_settings_section vm_settings_general">
             <h5>General</h5>
             <ul>
                 <li>Base Memory Allocated: ${vm.memorySize}MB</li>
                 <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
-                <li>Boot Order: TODO</li>
+                <li>Boot Order:
+                    <ol>
+                        <li py:for="device in boot_devices">
+                            <py:choose test="device">
+                                <py:when test="1">Floppy</py:when>
+                                <py:when test="2">CD/DVD-ROM</py:when>
+                                <py:when test="3">Hard Disk</py:when>
+                                <py:when test="4">Network</py:when>
+                            </py:choose>
+                        </li>
+                    </ol>
+                </li>
                 <li>ACPI:
                     <py:choose test="vm.BIOSSettings.ACPIEnabled">
                         <py:when test="False">Off</py:when>
@@ -68,7 +103,20 @@
           <div class="vm_settings_section vm_settings_hard_disks">
             <h5>Hard Disks</h5>
             <ul>
-                <li>TODO</li>
+                <li py:for="attachment in disk_attachments">
+                  <strong>${attachment.hardDisk.name}</strong>
+                  <ul>
+                    <li>Format: ${attachment.hardDisk.format}</li>
+                    <li>Size: ${attachment.hardDisk.logicalSize}MB</li>
+                    <li>Type:
+                      <py:choose test="attachment.hardDisk.type">
+                        <py:when test="0"><span title="Normal: attached directly or indirectly, preserved when taking snapshots">Normal</span></py:when>
+                        <py:when test="1"><span title="Immutable: attached indirectly, changes are wiped out after powering off the virtual machine">Immutable</span></py:when>
+                        <py:when test="2"><span title="Write Through: attached directly, ignored when taking snapshots">Write Through</span></py:when>
+                      </py:choose>
+                    </li>
+                  </ul>
+                </li>
             </ul>
           </div>
           <div class="vm_settings_section vm_settings_cd_dvd-rom">
@@ -116,31 +164,42 @@
                   </py:when>
                 </py:choose>
               </li>
-              <py:choose test="vm.audioAdapter.enabled">
-                <py:when test="True">
-                  <li>
-                    Driver:
-                    <py:choose test="vm.audioAdapter.audioDriver">
-                      <py:when test="0">NULL</py:when>
-                      <py:when test="1">WinMM</py:when>
-                      <py:when test="2">OSS</py:when>
-                      <py:when test="3">ALSA</py:when>
-                      <py:when test="4">DirectSound</py:when>
-                      <py:when test="5">CoreAudio</py:when>
-                      <py:when test="6">MMPM</py:when>
-                      <py:when test="7">PulseAudio</py:when>
-                      <py:when test="8">Solaris Audio</py:when>
-                    </py:choose>
-                  </li>
-                  <li>
-                    Controller:
-                    <py:choose test="vm.audioAdapter.audioController">
-                      <py:when test="0">ICH AC97</py:when>
-                      <py:when test="1">SoundBlaster 16</py:when>
-                    </py:choose>
-                  </li>
-                </py:when>
-              </py:choose>
+              <py:if test="vm.audioAdapter.enabled is True">
+                <li>
+                  Driver:
+                  <py:choose test="vm.audioAdapter.audioDriver">
+                    <py:when test="0">NULL</py:when>
+                    <py:when test="1">WinMM</py:when>
+                    <py:when test="2">OSS</py:when>
+                    <py:when test="3">ALSA</py:when>
+                    <py:when test="4">DirectSound</py:when>
+                    <py:when test="5">CoreAudio</py:when>
+                    <py:when test="6">MMPM</py:when>
+                    <py:when test="7">PulseAudio</py:when>
+                    <py:when test="8">Solaris Audio</py:when>
+                  </py:choose>
+                </li>
+                <li>
+                  Controller:
+                  <py:choose test="vm.audioAdapter.audioController">
+                    <py:when test="0">ICH AC97</py:when>
+                    <py:when test="1">SoundBlaster 16</py:when>
+                  </py:choose>
+                </li>
+              </py:if>
+            </ul>
+          </div>
+          <div class="vm_settings_section vm_settings_shared_folders">
+            <h5>Shared Folders</h5>
+            <ul>
+              <li py:for="shared_folder in shared_folders">
+                ${shared_folder.name}
+                <ul>
+                  <li>Accessible: ${shared_folder.accessible}</li>
+                  <li>Writable: ${shared_folder.writable}</li>
+                  <li>Host Path:<br/>${shared_folder.hostPath}</li>
+                </ul>
+              </li>
             </ul>
           </div>
           <div class="vm_settings_section vm_settings_serial_ports">
@@ -149,30 +208,6 @@
                 <li>TODO</li>
             </ul>
           </div>
-          <div class="vm_settings_section vm_settings_shared_folders">
-            <h5>Shared Folders</h5>
-            <ul>
-                <li>TODO</li>
-            </ul>
-          </div>
-        </div>
-        <div class='vm_actions'>
-        <h5>Actions:</h5>
-        <ul>
-            <py:if test="state in ('Powered Off', 'Saved', 'Aborted')">
-                <li><a href="/control_vm/${vm.id}/power_up" title="Power Up VM">Power Up VM</a></li>
-            </py:if>
-            <py:if test="state in ('Running', 'Paused', 'Stuck')">
-                <li><a href="/control_vm/${vm.id}/power_off">Power Off VM</a></li>
-            </py:if>
-            <py:if test="state == 'Running'">
-                <li><a href="/control_vm/${vm.id}/pause">Pause VM</a></li>
-                <li>Save State</li>
-            </py:if>
-            <py:if test="state == 'Paused'">
-                <li><a href="/control_vm/${vm.id}/resume">Resume VM</a></li>
-            </py:if>
-        </ul>
         </div>
     </body>
 </html>
