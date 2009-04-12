@@ -10,7 +10,7 @@
     <h3>Existing Virtual Machines:</h3>
     <ul py:if="vms" class="list_vms">
       <li py:for="vm in vms" class="${vm.OSTypeId.lower()}">
-        <a href="/vm_info/${vm.id}">${vm.name}</a>
+        <a href="/vm/info/${vm.id}">${vm.name}</a>
         <ul>
           <li><strong>State:</strong> ${VM_STATES[int(vm.state)]}</li>
           <li><strong>OS:</strong> ${vm.OSTypeId}</li>
