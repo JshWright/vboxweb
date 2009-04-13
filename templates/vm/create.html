@@ -2,21 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:xi="http://www.w3.org/2001/XInclude"
       xmlns:py="http://genshi.edgewall.org/">
-    <xi:include href="layout.html" />
+    <xi:include href="../layout.html" />
     <head>
-        <title>Modify VM - ${vm.name}</title>
+        <title>Create a New VM</title>
     </head>
     <body class="index">
         <dl class="breadcrumb">
             <dd><a href="/">List VMs</a></dd>
             <dd>&#62;</dd>
-            <dd><strong><a href="/vm_info/${vm.id}">${vm.name}</a></strong></dd>
-            <dd>&#62;</dd>
-            <dd>Modify</dd>
+            <dd><strong>Create a VM</strong></dd>
         </dl>
         <form action="" method="post">
           <fieldset>
-            <legend>Modify Virtual Machine</legend>
+            <legend>Create Virtual Machine</legend>
           <div class="fields">
             <div>
               <label for="name">VM Name:</label>
@@ -27,7 +25,7 @@
               <input type="text" id="description" name="description" />
             </div>
             <div>
-              <label for="guest_os">Description:</label>
+              <label for="guest_os">Guest OS:</label>
               <select id="guest_os" name="guest_os">
                 <option>Windows XP</option>
               </select>
