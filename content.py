@@ -44,14 +44,6 @@ class Root:
         self.mgr = mgr
         self.vbox = vbox
 
-    def get_existing_session(self, uuid):
-        session = self.mgr.getSessionObject(self.vbox)
-        try:
-            self.vbox.openExistingSession(session, uuid)
-        except xpcom.COMException,e:
-            return "Unable to process action: %s" % e
-        return session
-
     @cherrypy.expose
     def index(self):
         if self.vbox.version[:3] != '2.2':
@@ -68,7 +60,8 @@ class Root:
             progress = self.vbox.openRemoteSession(session, uuid, 'vrdp', '')
             progress.waitForCompletion(-1)
         else:
-            session = self.get_existing_session(uuid)
+            session = self.mgr.getSessionObject(self.vbox)
+            self.vbox.openExistingSession(session, uuid)
             console = session.console
             if action == 'power_off':
                 console.powerDown()
