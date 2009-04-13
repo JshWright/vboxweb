@@ -50,53 +50,53 @@
                 <li>Base Memory Allocated: ${vm.memorySize}MB</li>
                 <li>Video Memory Allocated: ${vm.VRAMSize}MB</li>
                 <li>Boot Order:
-                    <ol>
-                        <li py:for="device in boot_devices">
-                            <py:choose test="device">
-                                <py:when test="1">Floppy</py:when>
-                                <py:when test="2">CD/DVD-ROM</py:when>
-                                <py:when test="3">Hard Disk</py:when>
-                                <py:when test="4">Network</py:when>
-                            </py:choose>
-                        </li>
-                    </ol>
+                  <ol>
+                    <li py:for="device in boot_devices">
+                      <py:choose test="device">
+                        <py:when test="1">Floppy</py:when>
+                        <py:when test="2">CD/DVD-ROM</py:when>
+                        <py:when test="3">Hard Disk</py:when>
+                        <py:when test="4">Network</py:when>
+                      </py:choose>
+                    </li>
+                  </ol>
                 </li>
                 <li>ACPI:
-                    <py:choose test="vm.BIOSSettings.ACPIEnabled">
-                        <py:when test="False">Off</py:when>
-                        <py:when test="True">On</py:when>
-                    </py:choose>
+                  <py:choose test="vm.BIOSSettings.ACPIEnabled">
+                    <py:when test="False">Off</py:when>
+                    <py:when test="True">On</py:when>
+                  </py:choose>
                 </li>
                 <li>IO APIC:
-                    <py:choose test="vm.BIOSSettings.IOAPICEnabled">
-                        <py:when test="False">Off</py:when>
-                        <py:when test="True">On</py:when>
-                    </py:choose>
+                  <py:choose test="vm.BIOSSettings.IOAPICEnabled">
+                    <py:when test="False">Off</py:when>
+                    <py:when test="True">On</py:when>
+                  </py:choose>
                 </li>
                 <li>Hardware Virtualization:
-                    <py:choose test="vm.HWVirtExEnabled">
-                        <py:when test="0">Off</py:when>
-                        <py:when test="1">On</py:when>
-                        <py:when test="2">Default</py:when>
-                    </py:choose>
+                  <py:choose test="vm.HWVirtExEnabled">
+                    <py:when test="0">Off</py:when>
+                    <py:when test="1">On</py:when>
+                    <py:when test="2">Default</py:when>
+                  </py:choose>
                 </li>
                 <li>Nested Paging:
-                    <py:choose test="vm.HWVirtExNestedPagingEnabled">
-                        <py:when test="False">Off</py:when>
-                        <py:when test="True">On</py:when>
-                    </py:choose>
+                  <py:choose test="vm.HWVirtExNestedPagingEnabled">
+                    <py:when test="False">Off</py:when>
+                    <py:when test="True">On</py:when>
+                  </py:choose>
                 </li>
                 <li>PAE/NX:
-                    <py:choose test="vm.PAEEnabled">
-                      <py:when test="False">Disabled</py:when>
-                      <py:when test="True">Enabled</py:when>
-                    </py:choose>
+                  <py:choose test="vm.PAEEnabled">
+                    <py:when test="False">Disabled</py:when>
+                    <py:when test="True">Enabled</py:when>
+                  </py:choose>
                 </li>
                 <li>3D Acceleration:
-                    <py:choose test="vm.accelerate3DEnabled">
-                      <py:when test="False">Disabled</py:when>
-                      <py:when test="True">Enabled</py:when>
-                    </py:choose>
+                  <py:choose test="vm.accelerate3DEnabled">
+                    <py:when test="False">Disabled</py:when>
+                    <py:when test="True">Enabled</py:when>
+                  </py:choose>
                 </li>
             </ul>
           </div>
@@ -205,7 +205,7 @@
           <div class="vm_settings_section vm_settings_serial_ports">
             <h5>Serial Ports</h5>
             <ul>
-                <li>TODO</li>
+              <li>TODO</li>
             </ul>
           </div>
         </div>
