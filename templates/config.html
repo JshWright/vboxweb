@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+    <xi:include href="layout.html" />
+    <head>
+        <title>VBoxWeb Configuration</title>
+    </head>
+    <body class="index">
+        <dl class="breadcrumb">
+            <dd><a href="/">Home</a></dd>
+            <dd>&#62;</dd>
+            <dd><strong>Configuration</strong></dd>
+        </dl>
+        <form action="" method="post">
+          <fieldset>
+            <legend>VBoxWeb Configuration</legend>
+          <div class="fields">
+            Note: You will need to restart VBoxWeb to apply any configuration changes. Passwords are
+            stored locally, and not encyrpted, so please don't use your bank account password...
+            <div>
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username" />
+            </div>
+            <div>
+              <label for="password">New Password:</label>
+              <input type="password" id="password" name="password" />
+            </div>
+            <div>
+              <label for="password_confirm">Confirm Password:</label>
+              <input type="password" id="password_confirm" name="password_confirm" />
+            </div>
+            <div>
+              <label for="port">Port VBoxWeb should listen on:</label>
+              <input type="text" id="port" name="port" />
+            </div>
+          </div>
+          <div class="form_actions">
+            <input type="submit" value="Submit" />
+          </div>
+          </fieldset>
+        </form>
+    </body>
+</html>

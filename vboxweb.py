@@ -25,7 +25,7 @@
 #
 # ***** END LICENSE BLOCK *****
 
-import os, sys
+import os, sys, pickle
 
 USAGE = """
 
@@ -68,7 +68,11 @@ vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
 
 def main(argv):
 
-    port = 8080
+    f = open('config.pkl')
+    vboxweb_config = pickle.load(f)
+    f.close()
+
+    port = vboxweb_config['port']
 
     if len(argv) > 1:
         i = iter(argv)
@@ -96,6 +100,11 @@ def main(argv):
     root.vm = VM(LocalManager(), vbox)
 
     cherrypy.quickstart(root, '/', {
+        '/': {
+            'tools.digest_auth.on': True,
+            'tools.digest_auth.realm': 'Some site',
+            'tools.digest_auth.users': {vboxweb_config['username']: vboxweb_config['password']}
+        },
         '/media': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': 'media'
