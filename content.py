@@ -153,3 +153,12 @@ class VM:
             filler = HTMLFormFiller(data=form_data)
             tmpl = loader.load('vm/modify.html')
             return tmpl.generate(vm=vm).filter(filler).render('html', doctype='html')
+
+    @cherrypy.expose
+    def create(self, **form_data):
+        if cherrypy.request.method.upper() == 'POST':
+            #TODO Some form validation might be nice, eh?
+            pass
+        else:
+            tmpl = loader.load('vm/create.html')
+            return tmpl.generate().render('html', doctype='html')
