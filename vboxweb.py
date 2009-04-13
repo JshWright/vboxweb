@@ -100,6 +100,11 @@ def main(argv):
     root.vm = VM(LocalManager(), vbox)
 
     cherrypy.quickstart(root, '/', {
+        '/': {
+            'tools.digest_auth.on': True,
+            'tools.digest_auth.realm': 'Some site',
+            'tools.digest_auth.users': {vboxweb_config['username']: vboxweb_config['password']}
+        },
         '/media': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': 'media'
