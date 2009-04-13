@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+    <xi:include href="layout.html" />
+    <head>
+        <title>Modify VM - ${vm.name}</title>
+    </head>
+    <body class="index">
+        <dl class="breadcrumb">
+            <dd><a href="/">List VMs</a></dd>
+            <dd>&#62;</dd>
+            <dd><strong><a href="/vm_info/${vm.id}">${vm.name}</a></strong></dd>
+            <dd>&#62;</dd>
+            <dd>Modify</dd>
+        </dl>
+        <form action="" method="post">
+          <fieldset>
+            <legend>Modify Virtual Machine</legend>
+          <div class="fields">
+            <div>
+              <label for="name">VM Name:</label>
+              <input type="text" id="name" name="name" />
+            </div>
+            <div>
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description" />
+            </div>
+            <div>
+              <label for="guest_os">Description:</label>
+              <select id="guest_os" name="guest_os">
+                <option>Windows XP</option>
+              </select>
+            </div>
+            <div>
+              <label for="memory">Memory Allocated (<abbr title="Megabytes">MB</abbr>):</label>
+              <input type="text" id="memory" name="memory" />
+            </div>
+            <div>
+              <label for="vram">Video Memory Allocated (<abbr title="Megabytes">MB</abbr>):</label>
+              <input type="text" id="vram" name="vram" />
+            </div>
+          </div>
+          <div class="form_actions">
+            <input type="submit" value="Submit" />
+            <input type="submit" name="cancel" value="Cancel" />
+          </div>
+          </fieldset>
+        </form>
+    </body>
+</html>
