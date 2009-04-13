@@ -53,8 +53,30 @@ class Root:
         tmpl = loader.load('index.html')
         return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
 
+class VM:
+
+    def __init__(self, mgr, vbox):
+        self.mgr = mgr
+        self.vbox = vbox
+
     @cherrypy.expose
-    def control_vm(self, uuid, action):
+    def info(self, uuid):
+        vm = self.vbox.getMachine(uuid)
+        state = VM_STATES[int(vm.state)]
+        os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
+        guest_os = os_type_obj.description
+        boot_devices = []
+        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
+            device = vm.getBootOrder(position)
+            if device != 0:
+                boot_devices.append(device)
+        disk_attachments = vm.getHardDiskAttachments()
+        shared_folders = vm.getSharedFolders()
+        tmpl = loader.load('vm/info.html')
+        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
+
+    @cherrypy.expose
+    def control(self, action, uuid):
         if action == 'power_up':
             session = self.mgr.getSessionObject(self.vbox)
             progress = self.vbox.openRemoteSession(session, uuid, 'vrdp', '')
@@ -78,11 +100,10 @@ class Root:
         raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
 
     @cherrypy.expose
-    def modify_vm(self, uuid, **form_data):
+    def modify(self, uuid, **form_data):
         if cherrypy.request.method.upper() == 'POST':
             #TODO Some form validation might be nice, eh?
             try:
-                print form_data
                 session = self.mgr.getSessionObject(self.vbox)
                 self.vbox.openSession(session, uuid)
                 vm = session.machine
@@ -90,30 +111,24 @@ class Root:
                 vm.description = form_data['description']
                 vm.memorySize = form_data['memory']
                 vm.VRAMSize = form_data['vram']
+                vm.BIOSSettings.ACPIEnabled = 0
+                vm.BIOSSettings.IOAPICEnabled = 0
+                vm.HWVirtExEnabled = 0
+                vm.HWVirtExNestedPagingEnabled = 0
+                vm.PAEEnabled = 0
+                vm.accelerate3DEnabled = 0
                 if 'acpi' in form_data:
                     vm.BIOSSettings.ACPIEnabled = 1
-                else:
-                    vm.BIOSSettings.ACPIEnabled = 0
                 if 'ioapic' in form_data:
                     vm.BIOSSettings.IOAPICEnabled = 1
-                else:
-                    vm.BIOSSettings.IOAPICEnabled = 0
                 if 'hwvirtex' in form_data:
                     vm.HWVirtExEnabled = 1
-                else:
-                    vm.HWVirtExEnabled = 0
                 if 'nestedpaging' in form_data:
                     vm.HWVirtExNestedPagingEnabled = 1
-                else:
-                    vm.HWVirtExNestedPagingEnabled = 0
                 if 'pae' in form_data:
                     vm.PAEEnabled = 1
-                else:
-                    vm.PAEEnabled = 0
                 if '3daccel' in form_data:
                     vm.accelerate3DEnabled = 1
-                else:
-                    vm.accelerate3DEnabled = 0
                 vm.saveSettings()
                 session.close()
                 raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
@@ -136,27 +151,14 @@ class Root:
             if vm.HWVirtExEnabled == 1:
                 form_data['hwvirtex'] = True
             filler = HTMLFormFiller(data=form_data)
-            tmpl = loader.load('modify_vm.html')
+            tmpl = loader.load('vm/modify.html')
             return tmpl.generate(vm=vm).filter(filler).render('html', doctype='html')
 
-class VM:
-
-    def __init__(self, mgr, vbox):
-        self.mgr = mgr
-        self.vbox = vbox
-
     @cherrypy.expose
-    def info(self, uuid):
-        vm = self.vbox.getMachine(uuid)
-        state = VM_STATES[int(vm.state)]
-        os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
-        guest_os = os_type_obj.description
-        boot_devices = []
-        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
-            device = vm.getBootOrder(position)
-            if device != 0:
-                boot_devices.append(device)
-        disk_attachments = vm.getHardDiskAttachments()
-        shared_folders = vm.getSharedFolders()
-        tmpl = loader.load('vm/info.html')
-        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
+    def create(self, **form_data):
+        if cherrypy.request.method.upper() == 'POST':
+            #TODO Some form validation might be nice, eh?
+            pass
+        else:
+            tmpl = loader.load('vm/create.html')
+            return tmpl.generate().render('html', doctype='html')
