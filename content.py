@@ -161,4 +161,4 @@ class VM:
             pass
         else:
             tmpl = loader.load('vm/create.html')
-            return tmpl.generate().render('html', doctype='html')
+            return tmpl.generate(guest_oses=self.vbox.getGuestOSTypes()).render('html', doctype='html')

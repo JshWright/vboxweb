@@ -27,7 +27,9 @@
             <div>
               <label for="guest_os">Guest OS:</label>
               <select id="guest_os" name="guest_os">
-                <option>Windows XP</option>
+                <py:for each="os_type in guest_oses">
+                    <option value="${os_type.id}">${os_type.description}</option>
+                </py:for>
               </select>
             </div>
             <div>
