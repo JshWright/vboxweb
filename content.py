@@ -158,7 +158,13 @@ class VM:
     def create(self, **form_data):
         if cherrypy.request.method.upper() == 'POST':
             #TODO Some form validation might be nice, eh?
-            pass
+            new_vm = self.vbox.createMachine(form_data['name'], form_data['guest_os'], '', '00000000-0000-0000-0000-000000000000')
+            new_vm.description = form_data['description']
+            new_vm.memorySize = form_data['memory']
+            new_vm.VRAMSize = form_data['vram']
+            new_vm.saveSettings()
+            self.vbox.registerMachine(new_vm)
+            raise cherrypy.HTTPRedirect('/')
         else:
             tmpl = loader.load('vm/create.html')
             return tmpl.generate(guest_oses=self.vbox.getGuestOSTypes()).render('html', doctype='html')
