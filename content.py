@@ -111,30 +111,24 @@ class VM:
                 vm.description = form_data['description']
                 vm.memorySize = form_data['memory']
                 vm.VRAMSize = form_data['vram']
+                vm.BIOSSettings.ACPIEnabled = 0
+                vm.BIOSSettings.IOAPICEnabled = 0
+                vm.HWVirtExEnabled = 0
+                vm.HWVirtExNestedPagingEnabled = 0
+                vm.PAEEnabled = 0
+                vm.accelerate3DEnabled = 0
                 if 'acpi' in form_data:
                     vm.BIOSSettings.ACPIEnabled = 1
-                else:
-                    vm.BIOSSettings.ACPIEnabled = 0
                 if 'ioapic' in form_data:
                     vm.BIOSSettings.IOAPICEnabled = 1
-                else:
-                    vm.BIOSSettings.IOAPICEnabled = 0
                 if 'hwvirtex' in form_data:
                     vm.HWVirtExEnabled = 1
-                else:
-                    vm.HWVirtExEnabled = 0
                 if 'nestedpaging' in form_data:
                     vm.HWVirtExNestedPagingEnabled = 1
-                else:
-                    vm.HWVirtExNestedPagingEnabled = 0
                 if 'pae' in form_data:
                     vm.PAEEnabled = 1
-                else:
-                    vm.PAEEnabled = 0
                 if '3daccel' in form_data:
                     vm.accelerate3DEnabled = 1
-                else:
-                    vm.accelerate3DEnabled = 0
                 vm.saveSettings()
                 session.close()
                 raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
@@ -157,5 +151,5 @@ class VM:
             if vm.HWVirtExEnabled == 1:
                 form_data['hwvirtex'] = True
             filler = HTMLFormFiller(data=form_data)
-            tmpl = loader.load('modify_vm.html')
+            tmpl = loader.load('vm/modify.html')
             return tmpl.generate(vm=vm).filter(filler).render('html', doctype='html')
