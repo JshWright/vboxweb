@@ -25,7 +25,7 @@
 #
 # ***** END LICENSE BLOCK *****
 
-import os, sys, traceback, cherrypy
+import os, sys, traceback, cherrypy, pickle
 from genshi.template import TemplateLoader
 from genshi.filters import HTMLFormFiller
 
@@ -52,6 +52,32 @@ class Root:
             return tmpl.generate(error_message=error_message).render('html', doctype='html')
         tmpl = loader.load('index.html')
         return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
+
+    @cherrypy.expose
+    def config(self, **form_data):
+        f = open('config.pkl', 'r')
+        vboxweb_config = pickle.load(f)
+        f.close()
+        if cherrypy.request.method.upper() == 'POST':
+            if form_data['password']:
+                if form_data['password'] != form_data['password_confirm']:
+                    error_message = "Passwords don't match"
+                    tmpl = loader.load('error.html')
+                    return tmpl.generate(error_message=error_message).render('html', doctype='html')
+                vboxweb_config['password'] = form_data['password']
+            vboxweb_config['username'] = form_data['username']
+            vboxweb_config['port'] = int(form_data['port'])
+            f = open('config.pkl', 'w')
+            pickle.dump(vboxweb_config, f, 1)
+            f.close()
+            raise cherrypy.HTTPRedirect('/')
+        else:
+            form_data = {'username': vboxweb_config['username'],
+                         'port': vboxweb_config['port'],
+                        }
+            tmpl = loader.load('config.html')
+            filler = HTMLFormFiller(data=form_data)
+            return tmpl.generate().filter(filler).render('html', doctype='html')
 
 class VM:
 
