@@ -25,7 +25,7 @@
 #
 # ***** END LICENSE BLOCK *****
 
-import os, sys
+import os, sys, pickle
 
 USAGE = """
 
@@ -68,7 +68,11 @@ vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
 
 def main(argv):
 
-    port = 8080
+    f = open('config.pkl')
+    vboxweb_config = pickle.load(f)
+    f.close()
+
+    port = vboxweb_config['port']
 
     if len(argv) > 1:
         i = iter(argv)
