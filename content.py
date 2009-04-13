@@ -53,12 +53,57 @@ class Root:
         tmpl = loader.load('index.html')
         return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
 
+class VM:
+
+    def __init__(self, mgr, vbox):
+        self.mgr = mgr
+        self.vbox = vbox
+
     @cherrypy.expose
-    def modify_vm(self, uuid, **form_data):
+    def info(self, uuid):
+        vm = self.vbox.getMachine(uuid)
+        state = VM_STATES[int(vm.state)]
+        os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
+        guest_os = os_type_obj.description
+        boot_devices = []
+        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
+            device = vm.getBootOrder(position)
+            if device != 0:
+                boot_devices.append(device)
+        disk_attachments = vm.getHardDiskAttachments()
+        shared_folders = vm.getSharedFolders()
+        tmpl = loader.load('vm/info.html')
+        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
+
+    @cherrypy.expose
+    def control(self, action, uuid):
+        if action == 'power_up':
+            session = self.mgr.getSessionObject(self.vbox)
+            progress = self.vbox.openRemoteSession(session, uuid, 'vrdp', '')
+            progress.waitForCompletion(-1)
+        else:
+            session = self.mgr.getSessionObject(self.vbox)
+            self.vbox.openExistingSession(session, uuid)
+            console = session.console
+            if action == 'power_off':
+                console.powerDown()
+            elif action == 'reset':
+                console.reset()
+            elif action == 'pause':
+                console.pause()
+            elif action == 'save_state':
+                progress = console.saveState()
+                progress.waitForCompletion(-1)
+            elif action == 'resume':
+                console.resume()
+        session.close()
+        raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
+
+    @cherrypy.expose
+    def modify(self, uuid, **form_data):
         if cherrypy.request.method.upper() == 'POST':
             #TODO Some form validation might be nice, eh?
             try:
-                print form_data
                 session = self.mgr.getSessionObject(self.vbox)
                 self.vbox.openSession(session, uuid)
                 vm = session.machine
@@ -114,49 +159,3 @@ class Root:
             filler = HTMLFormFiller(data=form_data)
             tmpl = loader.load('modify_vm.html')
             return tmpl.generate(vm=vm).filter(filler).render('html', doctype='html')
-
-class VM:
-
-    def __init__(self, mgr, vbox):
-        self.mgr = mgr
-        self.vbox = vbox
-
-    @cherrypy.expose
-    def info(self, uuid):
-        vm = self.vbox.getMachine(uuid)
-        state = VM_STATES[int(vm.state)]
-        os_type_obj = self.vbox.getGuestOSType(vm.OSTypeId)
-        guest_os = os_type_obj.description
-        boot_devices = []
-        for position in range(1, self.vbox.systemProperties.maxBootPosition + 1):
-            device = vm.getBootOrder(position)
-            if device != 0:
-                boot_devices.append(device)
-        disk_attachments = vm.getHardDiskAttachments()
-        shared_folders = vm.getSharedFolders()
-        tmpl = loader.load('vm/info.html')
-        return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
-
-    @cherrypy.expose
-    def control(self, action, uuid):
-        if action == 'power_up':
-            session = self.mgr.getSessionObject(self.vbox)
-            progress = self.vbox.openRemoteSession(session, uuid, 'vrdp', '')
-            progress.waitForCompletion(-1)
-        else:
-            session = self.mgr.getSessionObject(self.vbox)
-            self.vbox.openExistingSession(session, uuid)
-            console = session.console
-            if action == 'power_off':
-                console.powerDown()
-            elif action == 'reset':
-                console.reset()
-            elif action == 'pause':
-                console.pause()
-            elif action == 'save_state':
-                progress = console.saveState()
-                progress.waitForCompletion(-1)
-            elif action == 'resume':
-                console.resume()
-        session.close()
-        raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
