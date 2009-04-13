@@ -54,30 +54,6 @@ class Root:
         return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
 
     @cherrypy.expose
-    def control_vm(self, uuid, action):
-        if action == 'power_up':
-            session = self.mgr.getSessionObject(self.vbox)
-            progress = self.vbox.openRemoteSession(session, uuid, 'vrdp', '')
-            progress.waitForCompletion(-1)
-        else:
-            session = self.mgr.getSessionObject(self.vbox)
-            self.vbox.openExistingSession(session, uuid)
-            console = session.console
-            if action == 'power_off':
-                console.powerDown()
-            elif action == 'reset':
-                console.reset()
-            elif action == 'pause':
-                console.pause()
-            elif action == 'save_state':
-                progress = console.saveState()
-                progress.waitForCompletion(-1)
-            elif action == 'resume':
-                console.resume()
-        session.close()
-        raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
-
-    @cherrypy.expose
     def modify_vm(self, uuid, **form_data):
         if cherrypy.request.method.upper() == 'POST':
             #TODO Some form validation might be nice, eh?
@@ -160,3 +136,27 @@ class VM:
         shared_folders = vm.getSharedFolders()
         tmpl = loader.load('vm/info.html')
         return tmpl.generate(vm=vm, state=state, guest_os=guest_os, disk_attachments=disk_attachments, shared_folders=shared_folders, boot_devices=boot_devices).render('html', doctype='html')
+
+    @cherrypy.expose
+    def control(self, action, uuid):
+        if action == 'power_up':
+            session = self.mgr.getSessionObject(self.vbox)
+            progress = self.vbox.openRemoteSession(session, uuid, 'vrdp', '')
+            progress.waitForCompletion(-1)
+        else:
+            session = self.mgr.getSessionObject(self.vbox)
+            self.vbox.openExistingSession(session, uuid)
+            console = session.console
+            if action == 'power_off':
+                console.powerDown()
+            elif action == 'reset':
+                console.reset()
+            elif action == 'pause':
+                console.pause()
+            elif action == 'save_state':
+                progress = console.saveState()
+                progress.waitForCompletion(-1)
+            elif action == 'resume':
+                console.resume()
+        session.close()
+        raise cherrypy.HTTPRedirect('/vm/info/' + uuid)
