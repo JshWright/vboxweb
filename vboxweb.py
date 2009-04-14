@@ -66,11 +66,19 @@ class LocalManager:
 
 vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
 
+DEFAULT_SETTINGS = {'username': 'vboxweb', 'password': 'vboxweb', 'port': 8080}
+
 def main(argv):
 
-    f = open('config.pkl')
-    vboxweb_config = pickle.load(f)
-    f.close()
+    if os.path.exists('config.pkl'):
+        f = open('config.pkl', 'r')
+        vboxweb_config = pickle.load(f)
+        f.close()
+    else:
+        vboxweb_config = DEFAULT_SETTINGS
+        f = open('config.pkl', 'w')
+        pickle.dump(vboxweb_config, f, 1)
+        f.close()
 
     port = vboxweb_config['port']
 
