@@ -259,17 +259,20 @@ ul.list_vms a {
 }
 ul.list_vms li{
   list-style-type: none;
-  background-image: url(/media/images/oses/other.png);
-  background-image: url(/media/images/oses/temp.png);
+  background-image: url(/media/images/oses/os_other.png);
   background-repeat: no-repeat;
   background-position: 0 0.4em;
   padding: 1em 1em 1em 3em;
   border-bottom: thin solid black;
 }
-ul.list_vms li.windowsxp,
-ul.list_vms li.windowsvista,
+ul.list_vms li.windowsxp{
+  background-image: url(/media/images/oses/os_winxp.png);
+}
+ul.list_vms li.windowsvista{
+  background-image: url(/media/images/oses/os_winvista.png);
+}
 ul.list_vms li.ubuntu{
-  background-image: url(/media/images/oses/temp.png);
+  background-image: url(/media/images/oses/os_ubuntu.png);
 }
 ul.list_vms li ul li{
   background-image: none;
