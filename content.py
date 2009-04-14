@@ -192,7 +192,7 @@ class VM:
             self.vbox.registerMachine(new_vm)
             raise cherrypy.HTTPRedirect('/')
         else:
-            base_memory_maximum = range(4, 3585)
-            video_memory_maximum = range(1, 129)
+            base_memory_range = range(4, 3585)
+            video_memory_range = range(1, 129)
             tmpl = loader.load('vm/create.html')
-            return tmpl.generate(guest_oses=self.vbox.getGuestOSTypes(), base_memory_maximum=base_memory_maximum, video_memory_maximum=video_memory_maximum).render('html', doctype='html')
+            return tmpl.generate(guest_oses=self.vbox.getGuestOSTypes(), base_memory_range=base_memory_range, video_memory_range=video_memory_range).render('html', doctype='html')
