@@ -200,6 +200,12 @@ form fieldset input{
   background-color:#EFEFEF;
   margin-right:0;
 }
+form fieldset select{
+  border: thin solid #7D88B3;
+  padding: 1px 2px;
+  background-color:#EFEFEF;
+  margin-right:0;
+}
 form fieldset input[type="submit"]{
   cursor: pointer;
 }
@@ -221,6 +227,9 @@ form fieldset div.fields div label{
   float:left;
   width:18em;
   text-align:right;
+}
+form fieldset div.fields div select{
+  float:right;
 }
 form fieldset div.fields div input{
   float:right;

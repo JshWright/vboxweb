@@ -34,11 +34,15 @@
             </div>
             <div>
               <label for="memory">Memory Allocated (<abbr title="Megabytes">MB</abbr>):</label>
-              <input type="text" id="memory" name="memory" />
+              <select id="memory" name="memory">
+                <option py:for="base_memory in base_memory_maximum" value="${base_memory}">${base_memory}</option>
+              </select>
             </div>
             <div>
               <label for="vram">Video Memory Allocated (<abbr title="Megabytes">MB</abbr>):</label>
-              <input type="text" id="vram" name="vram" />
+              <select id="vram" name="vram">
+                <option py:for="video_memory in video_memory_maximum" value="${video_memory}">${video_memory}</option>
+              </select>
             </div>
           </div>
           <div class="form_actions">
