@@ -36,6 +36,8 @@ Usage:
         Print this usage list and exit
     -p, --port [port number]
         Set the port number VBoxWeb should listen on
+    --vbox-path [path]
+        The path to VBoxPython.so (i.e. /usr/lib/virtualbox/)        
 """
 
 try:
@@ -52,19 +54,11 @@ except ImportError:
           """
     sys.exit()
 
-sys.path.append('/usr/lib/virtualbox')
-
-import xpcom.vboxxpcom
-import xpcom
-import xpcom.components
-
 from content import Root, VM
 
 class LocalManager:
     def getSessionObject(self, vbox):
         return xpcom.components.classes["@virtualbox.org/Session;1"].createInstance()
-
-vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
 
 DEFAULT_SETTINGS = {'username': 'vboxweb', 'password': 'vboxweb', 'port': 8080}
 
@@ -81,6 +75,7 @@ def main(argv):
         f.close()
 
     port = vboxweb_config['port']
+    vbox_python_path = '/usr/lib/virtualbox'
 
     if len(argv) > 1:
         i = iter(argv)
@@ -88,13 +83,21 @@ def main(argv):
         for arg in i:
             if arg in ('-p', '--port'):
                 port = i.next()
-            if arg in ('-h', '--help'):
+            elif arg == '--vbox-path':
+                vbox_python_path = i.next()
+            elif arg in ('-h', '--help'):
                 print USAGE
                 sys.exit(0)
             else:
                 print "\nUnknown command: %s" % arg
                 print USAGE
                 sys.exit(1)
+
+    sys.path.append(vbox_python_path)
+    import xpcom.vboxxpcom
+    import xpcom
+    import xpcom.components
+    vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
 
     cherrypy.config.update({
         'server.socket_port': port,
