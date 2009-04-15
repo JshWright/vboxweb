@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+    <xi:include href="../layout.html" />
+    <head>
+        <title>Hard Disk Info - ${hard_disk.name}</title>
+    </head>
+    <body class="index">
+        <dl class="breadcrumb">
+            <dd><a href="/">Home</a></dd>
+            <dd>&#62;</dd>
+            <dd><strong><a href="/harddisk/info/${hard_disk.id}">${hard_disk.name}</a></strong></dd>
+            <dd>&#62;</dd>
+            <dd>Hard Disk Info</dd>
+        </dl>
+        <h2>Hard Disk Name: ${hard_disk.name}</h2>
+        <hr/>
+        <div class='hard_disk_actions'>
+          <h5>Actions:</h5>
+          <ul>
+            <li>Clone HD</li>
+          </ul>
+          <div class="foo"></div>
+        </div>
+        <div class="hard_disk_settings">
+          <div class="hard_disk_settings_section hard_disk_settings_general">
+            <h5>General Information</h5>
+            <ul>
+                <li>Hard Disk Name: ${hard_disk.name}</li>
+                <li>Location: ${hard_disk.location}</li>
+                <li>Size on Disk: ${hard_disk.size/1024}MB</li>
+                <li>Size reported to Guest: ${hard_disk.logicalSize}MB</li>
+            </ul>
+          </div>
+        </div>
+    </body>
+</html>
