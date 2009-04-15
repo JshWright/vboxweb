@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+    <xi:include href="../layout.html" />
+    <head>
+        <title>Clone Hard Disk - ${source_disk.name}</title>
+    </head>
+    <body class="index">
+        <dl class="breadcrumb">
+            <dd><a href="/">Home</a></dd>
+            <dd>&#62;</dd>
+            <dd><strong><a href="/harddisk/info/${source_disk.id}">${source_disk.name}</a></strong></dd>
+            <dd>&#62;</dd>
+            <dd>Clone Hard Disk</dd>
+        </dl>
+        <h2>Source Disk: ${source_disk.name}</h2>
+        <form method='POST' action=''>
+        New VDI name: <input type='text' value='cloned_${source_disk.name}' /><br />
+        <input type='submit' value='Clone Hard Disk' />
+        </form>
+        <hr/>
+    </body>
+</html>

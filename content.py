@@ -208,3 +208,12 @@ class HardDisk:
         hard_disk = self.vbox.getHardDisk(uuid)
         tmpl = loader.load('harddisk/info.html')
         return tmpl.generate(hard_disk=hard_disk).render('html', doctype='html')
+
+    @cherrypy.expose
+    def clone(self, uuid):
+        source_disk = self.vbox.getHardDisk(uuid)
+        if cherrypy.request.method.upper() == 'POST':
+            new_disk = self.vbox.createHardDisk(self.vbox.systemProperties.defaultHardDiskFormat,
+                                                self.vbox.systemProperties.defaultHardDiskFolder)
+        tmpl = loader.load('harddisk/clone.html')
+        return tmpl.generate(source_disk=source_disk).render('html', doctype='html')
