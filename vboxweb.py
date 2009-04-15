@@ -54,7 +54,7 @@ except ImportError:
           """
     sys.exit()
 
-from content import Root, VM
+from content import Root, VM, HardDisk
 
 class LocalManager:
     def getSessionObject(self, vbox):
@@ -109,6 +109,7 @@ def main(argv):
 
     root = Root(LocalManager(), vbox)
     root.vm = VM(LocalManager(), vbox)
+    root.hard_disk = HardDisk(LocalManager(), vbox)
 
     cherrypy.quickstart(root, '/', {
         '/': {

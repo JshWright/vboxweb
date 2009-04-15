@@ -51,7 +51,7 @@ class Root:
             tmpl = loader.load('error.html')
             return tmpl.generate(error_message=error_message).render('html', doctype='html')
         tmpl = loader.load('index.html')
-        return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
+        return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES, hard_disks=self.vbox.getHardDisks()).render('html', doctype='html')
 
     @cherrypy.expose
     def config(self, **form_data):
@@ -196,3 +196,15 @@ class VM:
             video_memory_range = range(1, 129)
             tmpl = loader.load('vm/create.html')
             return tmpl.generate(guest_oses=self.vbox.getGuestOSTypes(), base_memory_range=base_memory_range, video_memory_range=video_memory_range).render('html', doctype='html')
+
+class HardDisk:
+
+    def __init__(self, mgr, vbox):
+        self.mgr = mgr
+        self.vbox = vbox
+
+    @cherrypy.expose
+    def info(self, uuid):
+        hard_disk = self.vbox.getHardDisk(uuid)
+        tmpl = loader.load('harddisk/info.html')
+        return tmpl.generate(hard_disk=hard_disk).render('html', doctype='html')
