@@ -1,11 +1,12 @@
 VBoxWeb is a web interface for Sun's VirtualBox, using the Python XPCOM
 bindings provided in the SDK.
 
-To run VBoxWeb, you will need CherryPy (3.0 or newer) and the Genshi templating
-engine.
+To run VBoxWeb, you will need CherryPy (3.0 or newer), the Genshi templating
+engine, and the simplejson library.
 
-http://www.cherrypy.org/
-http://genshi.edgewall.org/
+http://pypi.python.org/pypi/CherryPy
+http://pypi.python.org/pypi/Genshi
+http://pypi.python.org/pypi/simplejson
 
 Once you have the necessary prerequisites installed, simply run vboxweb.py as the
 user who owns the VMs you want to manage. Then point your browser to
