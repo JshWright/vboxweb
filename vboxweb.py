@@ -56,10 +56,6 @@ except ImportError:
 
 from content import Root, VM, HardDisk
 
-class LocalManager:
-    def getSessionObject(self, vbox):
-        return xpcom.components.classes["@virtualbox.org/Session;1"].createInstance()
-
 DEFAULT_SETTINGS = {'username': 'vboxweb', 'password': 'vboxweb', 'port': 8080}
 
 def main(argv):
@@ -98,6 +94,10 @@ def main(argv):
     import xpcom
     import xpcom.components
     vbox = xpcom.components.classes["@virtualbox.org/VirtualBox;1"].createInstance()
+
+    class LocalManager:
+        def getSessionObject(self, vbox):
+            return xpcom.components.classes["@virtualbox.org/Session;1"].createInstance()
 
     cherrypy.config.update({
         'server.socket_port': port,
