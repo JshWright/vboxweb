@@ -80,6 +80,7 @@ def main(argv):
 
     port = vboxweb_config['port']
     vbox_python_path = vboxweb_config['vbox_python_path']
+    save_settings = False
 
     if len(argv) > 1:
         i = iter(argv)
