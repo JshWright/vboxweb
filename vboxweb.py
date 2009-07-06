@@ -37,7 +37,7 @@ Usage:
     -p, --port [port number]
         Set the port number VBoxWeb should listen on
     --vbox-path [path]
-        The path to VBoxPython.so (i.e. /usr/lib/virtualbox/)        
+        The path to VBoxPython.so (i.e. /usr/lib/virtualbox/)
     -s, --save-settings
         Save any settings modified with command line arguments
 """
