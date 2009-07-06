@@ -56,7 +56,7 @@ except ImportError:
 
 from content import Root, VM, HardDisk
 
-DEFAULT_SETTINGS = {'username': 'vboxweb', 'password': 'vboxweb', 'port': 8080}
+DEFAULT_SETTINGS = {'username': 'vboxweb', 'password': 'vboxweb', 'port': 8080, 'vbox_python_path': '/usr/lib/virtualbox'}
 
 def main(argv):
 
@@ -71,7 +71,7 @@ def main(argv):
         f.close()
 
     port = vboxweb_config['port']
-    vbox_python_path = '/usr/lib/virtualbox'
+    vbox_python_path = vboxweb_config['vbox_python_path']
 
     if len(argv) > 1:
         i = iter(argv)
