@@ -66,6 +66,12 @@ def main(argv):
         f = open('config.pkl', 'r')
         vboxweb_config = pickle.load(f)
         f.close()
+        for key in DEFAULT_SETTINGS:
+            if key not in vboxweb_config:
+                vboxweb_config[key] = DEFAULT_SETTINGS[key]
+                f = open('config.pkl', 'w')
+                pickle.dump(vboxweb_config, f, 1)
+                f.close()
     else:
         vboxweb_config = DEFAULT_SETTINGS
         f = open('config.pkl', 'w')
