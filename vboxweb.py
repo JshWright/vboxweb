@@ -38,6 +38,8 @@ Usage:
         Set the port number VBoxWeb should listen on
     --vbox-path [path]
         The path to VBoxPython.so (i.e. /usr/lib/virtualbox/)        
+    -s, --save-settings
+        Save any settings modified with command line arguments
 """
 
 try:
@@ -81,6 +83,8 @@ def main(argv):
                 port = i.next()
             elif arg == '--vbox-path':
                 vbox_python_path = i.next()
+            elif arg in ('-s', '--save-settings'):
+                save_settings = True
             elif arg in ('-h', '--help'):
                 print USAGE
                 sys.exit(0)
@@ -88,6 +92,13 @@ def main(argv):
                 print "\nUnknown command: %s" % arg
                 print USAGE
                 sys.exit(1)
+
+    if save_settings:
+        vboxweb_config['port'] = port
+        vboxweb_config['vbox_python_path'] = vbox_python_path
+        f = open('config.pkl', 'w')
+        pickle.dump(vboxweb_config, f, 1)
+        f.close()
 
     sys.path.append(vbox_python_path)
     import xpcom.vboxxpcom
