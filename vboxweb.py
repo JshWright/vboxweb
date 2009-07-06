@@ -101,6 +101,7 @@ def main(argv):
 
     cherrypy.config.update({
         'server.socket_port': port,
+        'cherrypy.server.socket_host': '0.0.0.0',
         'tools.encode.on': True, 'tools.encode.encoding': 'utf-8',
         'tools.decode.on': True,
         'tools.trailing_slash.on': True,
