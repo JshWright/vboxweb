@@ -31,8 +31,8 @@
             <ul>
                 <li>Hard Disk Name: ${hard_disk.name}</li>
                 <li>Location: ${hard_disk.location}</li>
-                <li>Size on Disk: ${hard_disk.size/1024}MB</li>
-                <li>Size reported to Guest: ${hard_disk.logicalSize}MB</li>
+                <li>Size on Disk: ${hard_disk.size/1024/1024/1024} <abbr title="Gigabytes">GB</abbr> (${hard_disk.size/1024/1024} <abbr title="Megabytes">MB</abbr>)</li>
+                <li>Size reported to Guest: ${hard_disk.logicalSize/1024} <abbr title="Gigabytes">GB</abbr> (${hard_disk.logicalSize} <abbr title="Megabytes">MB</abbr>)</li>
             </ul>
           </div>
         </div>
