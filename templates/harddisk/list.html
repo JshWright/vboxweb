@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="../layout.html" />
+  <head>
+    <title>Hard Drives</title>
+  </head>
+  <body class="index">
+    <dl class="breadcrumb">
+        <dd><a href="/">Home</a></dd>
+        <dd>&#62;</dd>
+        <dd>Hard Disk List</dd>
+    </dl>
+    <h2>Existing Virtual Hard Disks:</h2>
+    <ul class="list_hard_disks">
+      <li py:for="hard_disk in hard_disks">
+        <a href="/hard_disk/info/${hard_disk.id}">${hard_disk.name}</a>
+      </li>
+    </ul>
+  </body>
+</html>
+
