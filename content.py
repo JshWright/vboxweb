@@ -51,7 +51,7 @@ class Root:
             tmpl = loader.load('error.html')
             return tmpl.generate(error_message=error_message).render('html', doctype='html')
         tmpl = loader.load('index.html')
-        return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES, hard_disks=self.vbox.getHardDisks()).render('html', doctype='html')
+        return tmpl.generate(vms=self.vbox.getMachines(), VM_STATES=VM_STATES).render('html', doctype='html')
 
     @cherrypy.expose
     def config(self, **form_data):
@@ -217,3 +217,9 @@ class HardDisk:
                                                 self.vbox.systemProperties.defaultHardDiskFolder)
         tmpl = loader.load('harddisk/clone.html')
         return tmpl.generate(source_disk=source_disk).render('html', doctype='html')
+
+    @cherrypy.expose
+    def list(self):
+        hard_disks=self.vbox.getHardDisks()
+        tmpl = loader.load('harddisk/list.html')
+        return tmpl.generate(hard_disks=hard_disks).render('html', doctype='html')

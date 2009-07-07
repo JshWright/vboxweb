@@ -17,12 +17,6 @@
         </ul>
       </li>
     </ul>
-    <h3>Existing Virtual Hard Disks:</h3>
-    <ul py:if="vms" class="list_hard_disks">
-      <li py:for="hard_disk in hard_disks">
-        <a href="/hard_disk/info/${hard_disk.id}">${hard_disk.name}</a>
-      </li>
-    </ul>
   </body>
 </html>
 

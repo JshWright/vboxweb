@@ -265,15 +265,6 @@ ul.list_vms li{
   padding: 1em 1em 1em 3em;
   border-bottom: thin solid black;
 }
-ul.list_vms li.windowsxp{
-  background-image: url(/media/images/oses/os_winxp.png);
-}
-ul.list_vms li.windowsvista{
-  background-image: url(/media/images/oses/os_winvista.png);
-}
-ul.list_vms li.ubuntu{
-  background-image: url(/media/images/oses/os_ubuntu.png);
-}
 ul.list_vms li ul li{
   background-image: none;
   list-style-type: disc;
@@ -306,3 +297,72 @@ ul.list_vms li ul li{
   color: #333;
   background: #D9D9D9;
 }
+
+ul.list_vms li.archlinux_64 { background-image: url(/media/images/oses/os_archlinux_64.png); }
+ul.list_vms li.archlinux { background-image: url(/media/images/oses/os_archlinux.png); }
+ul.list_vms li.debian_64 { background-image: url(/media/images/oses/os_debian_64.png); }
+ul.list_vms li.debian { background-image: url(/media/images/oses/os_debian.png); }
+ul.list_vms li.dos { background-image: url(/media/images/oses/os_dos.png); }
+ul.list_vms li.fedora_64 { background-image: url(/media/images/oses/os_fedora_64.png); }
+ul.list_vms li.fedora { background-image: url(/media/images/oses/os_fedora.png); }
+ul.list_vms li.freebsd_64 { background-image: url(/media/images/oses/os_freebsd_64.png); }
+ul.list_vms li.freebsd { background-image: url(/media/images/oses/os_freebsd.png); }
+ul.list_vms li.gentoo_64 { background-image: url(/media/images/oses/os_gentoo_64.png); }
+ul.list_vms li.gentoo { background-image: url(/media/images/oses/os_gentoo.png); }
+ul.list_vms li.l4 { background-image: url(/media/images/oses/os_l4.png); }
+ul.list_vms li.linux22 { background-image: url(/media/images/oses/os_linux22.png); }
+ul.list_vms li.linux24_64 { background-image: url(/media/images/oses/os_linux24_64.png); }
+ul.list_vms li.linux24 { background-image: url(/media/images/oses/os_linux24.png); }
+ul.list_vms li.linux26_64 { background-image: url(/media/images/oses/os_linux26_64.png); }
+ul.list_vms li.linux26 { background-image: url(/media/images/oses/os_linux26.png); }
+ul.list_vms li.linux { background-image: url(/media/images/oses/os_linux.png); }
+ul.list_vms li.mandriva_64 { background-image: url(/media/images/oses/os_mandriva_64.png); }
+ul.list_vms li.mandriva { background-image: url(/media/images/oses/os_mandriva.png); }
+ul.list_vms li.netbsd_64 { background-image: url(/media/images/oses/os_netbsd_64.png); }
+ul.list_vms li.netbsd { background-image: url(/media/images/oses/os_netbsd.png); }
+ul.list_vms li.netware { background-image: url(/media/images/oses/os_netware.png); }
+ul.list_vms li.openbsd_64 { background-image: url(/media/images/oses/os_openbsd_64.png); }
+ul.list_vms li.openbsd { background-image: url(/media/images/oses/os_openbsd.png); }
+ul.list_vms li.opensolaris_64 { background-image: url(/media/images/oses/os_opensolaris_64.png); }
+ul.list_vms li.opensolaris { background-image: url(/media/images/oses/os_opensolaris.png); }
+ul.list_vms li.opensuse_64 { background-image: url(/media/images/oses/os_opensuse_64.png); }
+ul.list_vms li.opensuse { background-image: url(/media/images/oses/os_opensuse.png); }
+ul.list_vms li.os2ecs { background-image: url(/media/images/oses/os_os2ecs.png); }
+ul.list_vms li.os2 { background-image: url(/media/images/oses/os_os2_other.png); }
+ul.list_vms li.os2warp3 { background-image: url(/media/images/oses/os_os2warp3.png); }
+ul.list_vms li.os2warp4 { background-image: url(/media/images/oses/os_os2warp4.png); }
+ul.list_vms li.os2warp45 { background-image: url(/media/images/oses/os_os2warp45.png); }
+ul.list_vms li.qnx { background-image: url(/media/images/oses/os_qnx.png); }
+ul.list_vms li.redhat_64 { background-image: url(/media/images/oses/os_redhat_64.png); }
+ul.list_vms li.redhat { background-image: url(/media/images/oses/os_redhat.png); }
+ul.list_vms li.solaris_64 { background-image: url(/media/images/oses/os_solaris_64.png); }
+ul.list_vms li.solaris { background-image: url(/media/images/oses/os_solaris.png); }
+ul.list_vms li.turbolinux { background-image: url(/media/images/oses/os_turbolinux.png); }
+ul.list_vms li.ubuntu_64 { background-image: url(/media/images/oses/os_ubuntu_64.png); }
+ul.list_vms li.ubuntu { background-image: url(/media/images/oses/os_ubuntu.png); }
+ul.list_vms li.windows2003_64 { background-image: url(/media/images/oses/os_win2k3_64.png); }
+ul.list_vms li.windows2003 { background-image: url(/media/images/oses/os_win2k3.png); }
+ul.list_vms li.windows2008_64 { background-image: url(/media/images/oses/os_win2k8_64.png); }
+ul.list_vms li.windows2008 { background-image: url(/media/images/oses/os_win2k8.png); }
+ul.list_vms li.windows2000 { background-image: url(/media/images/oses/os_win2k.png); }
+ul.list_vms li.windows31 { background-image: url(/media/images/oses/os_win31.png); }
+ul.list_vms li.windows7_64 { background-image: url(/media/images/oses/os_win7_64.png); }
+ul.list_vms li.windows7 { background-image: url(/media/images/oses/os_win7.png); }
+ul.list_vms li.windows95 { background-image: url(/media/images/oses/os_win95.png); }
+ul.list_vms li.windows98 { background-image: url(/media/images/oses/os_win98.png); }
+ul.list_vms li.windowsme { background-image: url(/media/images/oses/os_winme.png); }
+ul.list_vms li.windowsnt { background-image: url(/media/images/oses/os_winnt4.png); }
+ul.list_vms li.windowsnt4 { background-image: url(/media/images/oses/os_winnt4.png); }
+ul.list_vms li.windowsvista_64 { background-image: url(/media/images/oses/os_winvista_64.png); }
+ul.list_vms li.windowsvista { background-image: url(/media/images/oses/os_winvista.png); }
+ul.list_vms li.windowsxp_64 { background-image: url(/media/images/oses/os_winxp_64.png); }
+ul.list_vms li.windowsxp { background-image: url(/media/images/oses/os_winxp.png); }
+ul.list_vms li.xandros_64 { background-image: url(/media/images/oses/os_xandros_64.png); }
+ul.list_vms li.xandros { background-image: url(/media/images/oses/os_xandros.png); }
+
+ul.list_vms li.other { background-image: url(/media/images/oses/os_other.png); }
+/* Extras that are not in the list
+ul.list_vms li.windowsxp { background-image: url(/media/images/oses/os_win_other.png); }
+ul.list_vms li.windowsxp { background-image: url(/media/images/oses/os_linux_other.png); }
+ul.list_vms li.windowsxp { background-image: url(/media/images/oses/os_type_16px.png); }
+*/
