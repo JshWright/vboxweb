@@ -1,3 +1,15 @@
+
+
+###########################################
+NOTE:
+
+Since there is now an official VBoxWeb project from Sun, I will be suspending development on this project for the indefinite future. Any VBox related development on my part will now be on that Sun's project.
+
+Check it out at: http://code.google.com/p/vboxweb/
+###########################################
+
+
+
 VBoxWeb is a web interface for Sun's VirtualBox, using the Python XPCOM
 bindings provided in the SDK.
 
